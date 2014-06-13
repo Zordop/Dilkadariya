@@ -30,12 +30,14 @@ require_once(__DIR__ . '/functions/timber-term-getter.php');
 require_once(__DIR__ . '/functions/timber-image.php');
 require_once(__DIR__ . '/functions/timber-menu.php');
 
-//Other 2nd-class citizens
-require_once(__DIR__ . '/functions/timber-archives.php');
 require_once(__DIR__ . '/functions/timber-site.php');
 require_once(__DIR__ . '/functions/timber-theme.php');
 
+require_once(__DIR__ . '/functions/timber-context.php');
+require_once(__DIR__ . '/functions/timber-view.php');
 
+//Other 2nd-class citizens
+require_once(__DIR__ . '/functions/timber-archives.php');
 require_once(__DIR__ . '/functions/timber-loader.php');
 require_once(__DIR__ . '/functions/timber-function-wrapper.php');
 require_once(__DIR__ . '/functions/integrations/acf-timber.php');
@@ -74,6 +76,7 @@ class Timber {
         $this->test_compatibility();
         $this->init_constants();
         add_action('init', array($this, 'init_routes'));
+        add_filter('timber/context/default', array($this, 'timber_view_default_context'));
     }
 
     protected function test_compatibility(){
@@ -437,6 +440,14 @@ class Timber {
     /*  Template Setup and Display
     ================================ */
 
+    public static function timber_view_default_context($context){
+        $context['site'] = new TimberSite();
+        $context['theme'] = $context['site']->theme;
+        $context['view'] = array();
+        $context['view']['body_class'] = implode(' ', get_body_class());
+        return $context;
+    }
+
     /**
      * @return array
      */
@@ -502,12 +513,9 @@ class Timber {
      * @return  bool|string
      */
     public static function compile_string($string, $data = array()){
-        $dummy_loader = new TimberLoader();
-        $dummy_loader->get_twig();
-        $loader = new Twig_Loader_String();
-        $twig = new Twig_Environment($loader);
-        $twig = apply_filters('twig_apply_filters', $twig);
-        return $twig->render($string, $data);
+        $view = new TimberView(false);
+        $view->context = $data;
+        return $view->compile_string($string);
     }
 
     /**
@@ -775,26 +783,8 @@ class Timber {
      * @param int $offset
      * @return string|null
      */
-    public static function get_calling_script_dir($offset = 0) {
-        $caller = null;
-        $backtrace = debug_backtrace();
-        $i = 0;
-        foreach ($backtrace as $trace) {
-            if ($trace['file'] != __FILE__) {
-                $caller = $trace['file'];
-                break;
-            }
-            $i++;
-        }
-        if ($offset){
-            $caller = $backtrace[$i + $offset]['file'];
-        }
-        if ($caller !== null) {
-            $pathinfo = pathinfo($caller);
-            $dir = $pathinfo['dirname'];
-            return $dir;
-        }
-        return null;
+    public static function get_calling_script_dir($offset = 1) {
+        return TimberLoader::get_calling_script_dir($offset);
     }
 
     /**

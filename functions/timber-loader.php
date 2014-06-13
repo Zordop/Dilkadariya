@@ -22,13 +22,15 @@ class TimberLoader
 
     protected $cache_mode = self::CACHE_TRANSIENT;
 
-    public $locations;
+    public $locations = array();
 
     /**
      * @param bool $caller
      */
     function __construct($caller = false) {
-        $this->locations = $this->get_locations($caller);
+        if ($caller){
+            $this->locations = $this->get_locations($caller);
+        }
         $this->cache_mode = apply_filters('timber_cache_mode', $this->cache_mode);
     }
 
@@ -188,14 +190,26 @@ class TimberLoader
      * @return array
      */
     function get_locations($caller = false) {
+        $location_priorities = array('user-global', 'caller-not-theme', 'theme', 'caller');
         //prioirty: user locations, caller (but not theme), child theme, parent theme, caller
         $locs = array();
-        $locs = array_merge($locs, $this->get_locations_user());
-        $locs = array_merge($locs, $this->get_locations_caller($caller));
-        //remove themes from caller
-        $locs = array_diff($locs, $this->get_locations_theme());
-        $locs = array_merge($locs, $this->get_locations_theme());
-        $locs = array_merge($locs, $this->get_locations_caller($caller));
+        foreach($location_priorities as $loc_priority){
+            if ($loc_priority == 'user-global'){
+                $locs = array_merge($locs, $this->get_locations_user());
+            }
+            if ($loc_priority == 'caller-not-theme'){
+                $locs = array_merge($locs, $this->get_locations_caller($caller));
+                //remove themes from caller
+                $locs = array_diff($locs, $this->get_locations_theme());
+            }
+            if ($loc_priority == 'theme'){
+                $locs = array_merge($locs, $this->get_locations_theme());
+            }
+            if ($loc_priority == 'caller'){
+                $locs = array_merge($locs, $this->get_locations_caller($caller));
+            }
+
+        }
         $locs = array_unique($locs);
         $locs = apply_filters('timber_locations', $locs);
         return $locs;
@@ -205,6 +219,13 @@ class TimberLoader
      * @return Twig_Loader_Chain
      */
     function get_loader() {
+        if (is_array($this->locations) && count($this->locations)){
+            return $this->get_filesystem_loader();
+        }
+        return $this->get_string_loader();
+    }
+
+    private function get_filesystem_loader(){
         $paths = array();
         foreach ($this->locations as $loc) {
             $loc = realpath($loc);
@@ -222,6 +243,13 @@ class TimberLoader
         }
         $loader = new Twig_Loader_Filesystem($paths);
         return $loader;
+    }
+
+    /**
+     * @return Twig_Loader_String
+     */
+    private function get_string_loader(){
+        return new Twig_Loader_String();
     }
 
     /**
@@ -376,6 +404,32 @@ class TimberLoader
         }
 
         return $cache_mode;
+    }
+
+    /**
+     * @param int $offset
+     * @return string|null
+     */
+    public static function get_calling_script_dir($offset = 0) {
+        $caller = null;
+        $backtrace = debug_backtrace();
+        $i = 0;
+        foreach ($backtrace as $trace) {
+            if ($trace['file'] != __FILE__) {
+                $caller = $trace['file'];
+                break;
+            }
+            $i++;
+        }
+        if ($offset){
+            $caller = $backtrace[$i + $offset]['file'];
+        }
+        if ($caller !== null) {
+            $pathinfo = pathinfo($caller);
+            $dir = $pathinfo['dirname'];
+            return $dir;
+        }
+        return null;
     }
 
 }
