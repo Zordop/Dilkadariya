@@ -422,6 +422,10 @@ class TimberLoader
             $i++;
         }
         if ($offset){
+            $i++;
+            do {
+                $i--;
+            } while (!isset($backtrace[$i + $offset]['file']));
             $caller = $backtrace[$i + $offset]['file'];
         }
         if ($caller !== null) {

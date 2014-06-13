@@ -485,8 +485,8 @@ class Timber {
      * @param bool $via_render
      * @return bool|string
      */
-    public static function compile($filenames, $data = array(), $expires = false, $cache_mode = TimberLoader::CACHE_USE_DEFAULT, $via_render = false) {
-        $caller = self::get_calling_script_dir();
+    public static function compile($filenames, $data = array(), $expires = false, $cache_mode = TimberLoader::CACHE_USE_DEFAULT, $via_render = false, $offset = 2) {
+        $caller = self::get_calling_script_dir($offset);
         $loader = new TimberLoader($caller);
         $file = $loader->choose_template($filenames);
         $output = '';
@@ -565,7 +565,7 @@ class Timber {
         if (strstr(strtolower($sidebar), '.php')) {
             return self::get_sidebar_from_php($sidebar, $data);
         }
-        return self::compile($sidebar, $data);
+        return self::compile($sidebar, $data, false, TimberLoader::CACHE_USE_DEFAULT, false, 3);
     }
 
     /**

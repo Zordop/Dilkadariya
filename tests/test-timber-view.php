@@ -8,7 +8,7 @@
 			$post = new TimberPost($post_id);
 			$view = new TimberView();
 			$view->context['post'] = $post;
-			$str = $view->compile('/assets/single-post.twig');
+			$str = $view->compile('assets/single-post.twig');
 			$this->assertEquals('<h1>'.$title.'</h1>', $str);
 		}
 
