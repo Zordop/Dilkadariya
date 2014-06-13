@@ -29,7 +29,7 @@ class TimberLoader
      */
     function __construct($caller = false) {
         if ($caller){
-            $this->locations = $this->get_locations($caller);
+            $this->set_locations($this->get_default_locations($caller));
         }
         $this->cache_mode = apply_filters('timber_cache_mode', $this->cache_mode);
     }
@@ -41,7 +41,7 @@ class TimberLoader
      * @param string $cache_mode
      * @return bool|string
      */
-    function render($file, $data = null, $expires = false, $cache_mode = self::CACHE_USE_DEFAULT) {
+    function render($file, $data = array(), $expires = false, $cache_mode = self::CACHE_USE_DEFAULT) {
         // Different $expires if user is anonymous or logged in
         if (is_array($expires)) {
             if (is_user_logged_in() && isset($expires[1])) {
@@ -49,6 +49,9 @@ class TimberLoader
             } else {
                 $expires = $expires[0];
             }
+        }
+        if (is_null($data)){
+            $data = array();
         }
 
         $key = null;
@@ -186,10 +189,20 @@ class TimberLoader
     }
 
     /**
+     * @param array $locations
+    */
+    function set_locations($locations){
+        if ($locations == 'default'){
+            $locations = get_default_locations(false);
+        }
+        $this->locations = $locations;
+    }
+
+    /**
      * @param bool $caller
-     * @return array
+     * @return array of locations to look for templates in
      */
-    function get_locations($caller = false) {
+    function get_default_locations($caller = false) {
         $location_priorities = array('user-global', 'caller-not-theme', 'theme', 'caller');
         //prioirty: user locations, caller (but not theme), child theme, parent theme, caller
         $locs = array();
@@ -197,7 +210,7 @@ class TimberLoader
             if ($loc_priority == 'user-global'){
                 $locs = array_merge($locs, $this->get_locations_user());
             }
-            if ($loc_priority == 'caller-not-theme'){
+            if ($loc_priority == 'caller-not-theme' && $caller){
                 $locs = array_merge($locs, $this->get_locations_caller($caller));
                 //remove themes from caller
                 $locs = array_diff($locs, $this->get_locations_theme());
@@ -205,7 +218,7 @@ class TimberLoader
             if ($loc_priority == 'theme'){
                 $locs = array_merge($locs, $this->get_locations_theme());
             }
-            if ($loc_priority == 'caller'){
+            if ($loc_priority == 'caller' && $caller){
                 $locs = array_merge($locs, $this->get_locations_caller($caller));
             }
 
