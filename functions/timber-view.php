@@ -29,6 +29,7 @@ class TimberView {
 	}
 
 	public function compile($templates, $locations = 'default', $via_render = false){
+		$caller = false;
 		if ($locations == 'default'){
 			$caller = TimberLoader::get_calling_script_dir(2);
 		}
@@ -42,14 +43,13 @@ class TimberView {
         if (is_null($data)){
             $data = array();
         }
+        $action = 'compile';
         if (strlen($file)) {
             if ($via_render){
-                $file = apply_filters('timber_render_file', $file);
-                $data = apply_filters('timber_render_data', $data);
-            } else {
-                $file = apply_filters('timber_compile_file', $file);
-                $data = apply_filters('timber_compile_data', $data);
+            	$action = 'render';
             }
+            $file = apply_filters('timber/view/'.$action.'/file', $file);
+       		$data = apply_filters('timber/view/'.$action.'/context', $data);
             $output = $loader->render($file, $data, $this->expires, $this->cache_mode);
         }
         do_action('timber_compile_done');

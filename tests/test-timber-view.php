@@ -13,7 +13,28 @@
 		}
 
 		function testViewWithCustomLocations(){
-
+			$title = 'TimberView Test Post with Custom Locations';
+			$post_id = $this->factory->post->create(array('post_title' => $title));
+			$post = new TimberPost($post_id);
+			$locations = array(__DIR__.'/assets');
+			$view = new TimberView();
+			$view->context['post'] = $post;
+			$str = $view->compile('single-post.twig', $locations);
+			$this->assertEquals('<h1>'.$title.'</h1>', $str);
+			$str = $view->compile('assets/single-post.twig');
 		}
+
+		/**
+     	 * @expectedException Twig_Error_Loader
+     	*/
+    	public function testViewWithCustomLocationsException() {
+    		$title = 'TimberView Test Post with Custom Locations';
+			$post_id = $this->factory->post->create(array('post_title' => $title));
+			$post = new TimberPost($post_id);
+			$view = new TimberView();
+			$view->context['post'] = $post;
+			$str = $view->compile('single-post.twig');
+			// should get a load error here since we haven't told Timber to look inside of assets
+    	}
 
 	}
