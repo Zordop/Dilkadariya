@@ -44,7 +44,9 @@
 			$post = new TimberPost($post_id);
 			$view = new TimberView();
 			$view->context['post'] = $post;
-			$str = $view->compile('single-post.twig');
+			$str = $view->compile('single-post-custom.twig');
+
+			echo 'str='.$str;
 			// should get a load error here since we haven't told Timber to look inside of assets
     	}
 

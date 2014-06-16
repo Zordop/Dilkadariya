@@ -38,6 +38,7 @@ class TimberView {
         	$loader->set_locations($locations);
         }
         $file = $loader->choose_template($templates);
+        $locations = $loader->get_locations();
         $output = '';
         $data = $this->context;
         if (is_null($data)){

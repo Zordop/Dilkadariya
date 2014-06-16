@@ -21,6 +21,7 @@ class TimberLoader
     );
 
     protected $cache_mode = self::CACHE_TRANSIENT;
+    protected $twig_loader;
 
     public $locations = array();
 
@@ -61,12 +62,10 @@ class TimberLoader
             $key = md5($file . json_encode($data));
             $output = $this->get_cache($key, self::CACHEGROUP, $cache_mode);
         }
-
         if (false === $output || null === $output) {
             $twig = $this->get_twig();
             if (strlen($file)) {
-                $loader = $this->get_loader();
-                $result = $loader->getCacheKey($file);
+                $result = $this->twig_loader->getCacheKey($file);
                 do_action('timber_loader_render_file', $result);
             }
             $data = apply_filters('timber_loader_render_data', $data);
@@ -199,6 +198,13 @@ class TimberLoader
     }
 
     /**
+     *
+    */ 
+    function get_locations(){
+        return $this->locations;
+    }
+
+    /**
      * @param bool $caller
      * @return array of locations to look for templates in
      */
@@ -269,7 +275,7 @@ class TimberLoader
      * @return Twig_Environment
      */
     function get_twig() {
-        $loader = $this->get_loader();
+        $this->twig_loader = $this->get_loader();
         $params = array('debug' => WP_DEBUG, 'autoescape' => false);
         if (isset(Timber::$autoescape)) {
             $params['autoescape'] = Timber::$autoescape;
@@ -284,7 +290,7 @@ class TimberLoader
             }
             $params['cache'] = $twig_cache_loc;
         }
-        $twig = new Twig_Environment($loader, $params);
+        $twig = new Twig_Environment($this->twig_loader, $params);
         if (WP_DEBUG) {
             $twig->addExtension(new Twig_Extension_Debug());
         }

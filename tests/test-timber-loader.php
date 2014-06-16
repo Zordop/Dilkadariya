@@ -92,6 +92,7 @@
 			Timber::$locations = __DIR__.'/assets';
 			$str = Timber::compile('thumb-test.twig');
 			$this->assertEquals('<img src="" />', trim($str));
+			Timber::$locations = null;
 		}
 
 
