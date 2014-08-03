@@ -2,7 +2,7 @@
 Contributors: jarednova
 Tags: template engine, templates, twig
 Requires at least: 3.7
-Stable tag: 0.20.2
+Stable tag: 0.20.3
 Tested up to: 3.9.1
 PHP version: 5.3.0 or greater
 License: GPLv2 or later
@@ -41,7 +41,10 @@ Timber is great for any WordPress developer who cares about writing good, mainta
 
 == Changelog ==
 
-= 0.20.2
+= 0.20.3 = 
+* Fixed some issues with linking to menu items with a hash
+
+= 0.20.2 =
 * Change default response code on load_view to be 200
 * Fixed error with relpath and subdomains (thanks @jnweaver)
 * Various bug fixes (thanks @andyford, @discern)
