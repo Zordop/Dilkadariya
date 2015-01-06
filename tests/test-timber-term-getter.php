@@ -2,6 +2,13 @@
 
 	class TimberTermGetterTest extends WP_UnitTestCase {
 
+		function testGetTermsWithFields() {
+			$term_ids[] = $this->factory->term->create();
+			$term_ids[] = $this->factory->term->create();
+			$terms = Timber::get_terms('post_tag', array('fields' => 'id=>name'));
+			print_r($terms);
+		}
+
 		function testGetArrayOfTerms(){
 			$term_ids = array();
 			$term_ids[] = $this->factory->term->create();

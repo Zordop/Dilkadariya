@@ -66,7 +66,9 @@ class TimberTermGetter
         }
         $terms = get_terms($taxonomies, $args);
         foreach($terms as &$term){
-            $term = new $TermClass($term->term_id, $term->taxonomy);
+            if (is_object($term)) {
+                $term = new $TermClass($term->term_id, $term->taxonomy);
+            }
         }
         return $terms;
     }
