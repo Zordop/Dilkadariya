@@ -419,8 +419,7 @@ class Timber {
 	 * @deprecated since 0.20.0
 	 */
 	public static function load_template( $template, $query = false, $status_code = 200, $tparams = false ) {
-		print_r(scandir(__DIR__));
-		print_r(scandir(__DIR__.'/vendor'));
+		echo file_get_contents(__DIR__.'/vendor/composer/autoload_namespaces.php');
 		return Routes::load( $template, $tparams, $query, $status_code );
 	}
 
