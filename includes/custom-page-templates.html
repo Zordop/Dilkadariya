@@ -47,7 +47,7 @@
 <code class="prettyprint">php
 Timber::render(array(&#39;page-&#39; . $post-&gt;post_name . &#39;.twig&#39;, &#39;page.twig&#39;), $context);
 </code>
-Which is telling PHP to first look for a twig file named <code class="prettyprint">page-{{slug}}.twig</code> and falling back to <a href="https://github.com/Upstatement/timber-starter-theme/blob/master/views/page.twig"><code class="prettyprint">page.twig</code></a> if that doesn&rsquo;t exist.</p>
+Which is telling PHP to first look for a twig file named <code class="prettyprint">page-{{ slug }}.twig</code> and falling back to <a href="https://github.com/Upstatement/timber-starter-theme/blob/master/views/page.twig"><code class="prettyprint">page.twig</code></a> if that doesn&rsquo;t exist.</p>
 
 <hr>
 

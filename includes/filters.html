@@ -42,7 +42,7 @@
 <p>When you need to trim text to a desired length (in words)</p>
 
 <h6 id="twig">Twig:</h6>
-<pre class="highlight plaintext"><code>&lt;p class="intro"&gt;{{post.post_content|excerpt(30)}}...&lt;/p&gt;
+<pre class="highlight plaintext"><code>&lt;p class="intro"&gt;{{ post.post_content|excerpt(30) }}...&lt;/p&gt;
 </code></pre>
 
 <h6 id="output">Output:</h6>
@@ -56,7 +56,7 @@
 <p>Runs a function where you need. Really valuable for integrating plugins or existing themes</p>
 
 <h6 id="twig">Twig:</h6>
-<pre class="highlight plaintext"><code>&lt;div class="entry-meta"&gt;{{function('twenty_ten_entry_meta')}}&lt;/div&gt;
+<pre class="highlight plaintext"><code>&lt;div class="entry-meta"&gt;{{ function('twenty_ten_entry_meta') }}&lt;/div&gt;
 </code></pre>
 
 <h6 id="output">Output</h6>
@@ -68,7 +68,7 @@
 <p>Runs a function where you need. Really valuable for integrating plugins or existing themes</p>
 
 <h6 id="twig">Twig:</h6>
-<pre class="highlight plaintext"><code>&lt;div class="entry-meta"&gt;{{'twenty_ten_entry_meta'|function}}&lt;/div&gt;
+<pre class="highlight plaintext"><code>&lt;div class="entry-meta"&gt;{{ 'twenty_ten_entry_meta'|function }}&lt;/div&gt;
 </code></pre>
 
 <h6 id="output">Output</h6>
@@ -113,7 +113,7 @@
 
 <h6 id="twig">Twig:</h6>
 <pre class="highlight plaintext"><code>&lt;section class="gallery"&gt;
-{{post.custom_shortcode_field|shortcodes}}
+{{ post.custom_shortcode_field|shortcodes }}
 &lt;/section&gt;
 </code></pre>
 
@@ -130,7 +130,7 @@ Here is my gallery &lt;div class="gallery" id="gallery-123"&gt;&lt;img src="....
 <p>Displays a date in timeago format:</p>
 
 <h6 id="twig">Twig:</h6>
-<pre class="highlight plaintext"><code>&lt;p class="entry-meta"&gt;Posted: &lt;time&gt;{{post.post_date_gmt|time_ago}}&lt;/time&gt;&lt;/p&gt;
+<pre class="highlight plaintext"><code>&lt;p class="entry-meta"&gt;Posted: &lt;time&gt;{{ post.post_date_gmt|time_ago }}&lt;/time&gt;&lt;/p&gt;
 </code></pre>
 
 <h6 id="output">Output:</h6>
@@ -157,7 +157,7 @@ Here is my gallery &lt;div class="gallery" id="gallery-123"&gt;&lt;img src="....
 
 <h6 id="twig">Twig:</h6>
 <pre class="highlight plaintext"><code>&lt;div class="body"&gt;
-    {{post.custom_text_area|wpautop}}
+    {{ post.custom_text_area|wpautop }}
 &lt;/div&gt;
 </code></pre>
 

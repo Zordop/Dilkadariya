@@ -59,11 +59,11 @@
 <pre class="highlight plaintext"><code>&lt;nav&gt;
     &lt;ul class="main-nav"&gt;
     {% for item in menu.get_items %}
-        &lt;li class="nav-main-item {{item.classes | join(' ')}}"&gt;&lt;a class="nav-main-link" href="{{item.get_link}}"&gt;{{item.title}}&lt;/a&gt;
+        &lt;li class="nav-main-item {{ item.classes | join(' ') }}"&gt;&lt;a class="nav-main-link" href="{{ item.get_link }}"&gt;{{ item.title }}&lt;/a&gt;
             {% if item.get_children %}
             &lt;ul class="nav-drop"&gt;
               {% for child in item.get_children %}
-                &lt;li class="nav-drop-item"&gt;&lt;a href="{{child.get_link}}"&gt;{{child.title}}&lt;/a&gt;&lt;/li&gt;
+                &lt;li class="nav-drop-item"&gt;&lt;a href="{{ child.get_link }}"&gt;{{ child.title }}&lt;/a&gt;&lt;/li&gt;
               {% endfor %}
              &lt;/ul&gt;
           {% endif %}
@@ -185,11 +185,11 @@
 <pre class="highlight plaintext"><code>&lt;nav&gt;
     &lt;ul class="main-nav"&gt;
     {% for item in menu.get_items %}
-        &lt;li class="nav-main-item {{item.classes | join(' ')}}"&gt;&lt;a class="nav-main-link" href="{{item.get_link}}"&gt;{{item.title}}&lt;/a&gt;
+        &lt;li class="nav-main-item {{ item.classes | join(' ') }}"&gt;&lt;a class="nav-main-link" href="{{ item.get_link }}"&gt;{{ item.title }}&lt;/a&gt;
             {% if item.get_children %}
             &lt;ul class="nav-drop"&gt;
               {% for child in item.get_children %}
-                &lt;li class="nav-drop-item"&gt;&lt;a href="{{child.get_link}}"&gt;{{child.title}}&lt;/a&gt;&lt;/li&gt;
+                &lt;li class="nav-drop-item"&gt;&lt;a href="{{ child.get_link }}"&gt;{{ child.title }}&lt;/a&gt;&lt;/li&gt;
               {% endfor %}
              &lt;/ul&gt;
           {% endif %}

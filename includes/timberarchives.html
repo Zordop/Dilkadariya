@@ -43,9 +43,9 @@
 <h6 id="twig">Twig</h6>
 <pre class="highlight plaintext"><code>&lt;ul&gt;
 {% for item in archives.items %}
-    &lt;li&gt;&lt;a href="{{item.link}}"&gt;{{item.name}}&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="{{ item.link }}"&gt;{{ item.name }}&lt;/a&gt;&lt;/li&gt;
     {% for child in item.children %}
-        &lt;li class="child"&gt;&lt;a href="{{child.link}}"&gt;{{child.name}}&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="child"&gt;&lt;a href="{{ child.link }}"&gt;{{ child.name }}&lt;/a&gt;&lt;/li&gt;
     {% endfor %}
 {% endfor %}
 &lt;/ul&gt;
@@ -151,9 +151,9 @@
 <h6 id="twig">Twig</h6>
 <pre class="highlight plaintext"><code>&lt;ul&gt;
 {% for item in archives.items %}
-    &lt;li&gt;&lt;a href="{{item.link}}"&gt;{{item.name}}&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="{{ item.link }}"&gt;{{ item.name }}&lt;/a&gt;&lt;/li&gt;
     {% for child in item.children %}
-        &lt;li class="child"&gt;&lt;a href="{{child.link}}"&gt;{{child.name}}&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="child"&gt;&lt;a href="{{ child.link }}"&gt;{{ child.name }}&lt;/a&gt;&lt;/li&gt;
     {% endfor %}
 {% endfor %}
 &lt;/ul&gt;

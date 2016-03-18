@@ -48,10 +48,10 @@
 
 <h6 id="twig">Twig</h6>
 <pre class="highlight plaintext"><code>&lt;article&gt;
-    &lt;img src="{{cover_image.src}}" class="cover-image" /&gt;
-    &lt;h1 class="headline"&gt;{{post.title}}&lt;/h1&gt;
+    &lt;img src="{{ cover_image.src }}" class="cover-image" /&gt;
+    &lt;h1 class="headline"&gt;{{ post.title }}&lt;/h1&gt;
     &lt;div class="body"&gt;
-        {{post.content}}
+        {{ post.content }}
     &lt;/div&gt;
     &lt;img src="{{ Image(post.custom_field_with_image_id).src }}" alt="Another way to initialize images as TimberImages, but within Twig" /&gt;
 &lt;/article&gt;
@@ -304,8 +304,8 @@
 </tbody></table>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>    &lt;h1&gt;{{post.title}}&lt;/h1&gt;
-    &lt;img src="{{post.thumbnail.src}}" /&gt;
+<pre class="highlight plaintext"><code>    &lt;h1&gt;{{ post.title }}&lt;/h1&gt;
+    &lt;img src="{{ post.thumbnail.src }}" /&gt;
 </code></pre>
 
 <h6 id="html">HTML</h6>
@@ -361,10 +361,10 @@
 
 <h6 id="twig">Twig</h6>
 <pre class="highlight plaintext"><code>&lt;article&gt;
-    &lt;img src="{{cover_image.src}}" class="cover-image" /&gt;
-    &lt;h1 class="headline"&gt;{{post.title}}&lt;/h1&gt;
+    &lt;img src="{{ cover_image.src }}" class="cover-image" /&gt;
+    &lt;h1 class="headline"&gt;{{ post.title }}&lt;/h1&gt;
     &lt;div class="body"&gt;
-        {{post.content}}
+        {{ post.content }}
     &lt;/div&gt;
     &lt;img src="{{ Image(post.custom_field_with_image_id).src }}" alt="Another way to initialize images as TimberImages, but within Twig" /&gt;
 &lt;/article&gt;

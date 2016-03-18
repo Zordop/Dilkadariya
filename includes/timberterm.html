@@ -49,11 +49,11 @@
 </code></pre>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>&lt;h2&gt;{{term_page.name}} Archives&lt;/h2&gt;
+<pre class="highlight plaintext"><code>&lt;h2&gt;{{ term_page.name }} Archives&lt;/h2&gt;
 &lt;h3&gt;Teams&lt;/h3&gt;
 &lt;ul&gt;
-    &lt;li&gt;{{st_louis.name}} - {{st_louis.description}}&lt;/li&gt;
-    &lt;li&gt;{{team.name}} - {{team.description}}&lt;/li&gt;
+    &lt;li&gt;{{ st_louis.name }} - {{ st_louis.description }}&lt;/li&gt;
+    &lt;li&gt;{{ team.name }} - {{ team.description }}&lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
 
@@ -284,10 +284,10 @@
 </tbody></table>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>    &lt;h4&gt;Recent posts in {{term.name}}&lt;/h4&gt;
+<pre class="highlight plaintext"><code>    &lt;h4&gt;Recent posts in {{ term.name }}&lt;/h4&gt;
     &lt;ul&gt;
     {% for post in term.posts(3, 'post') %}
-        &lt;li&gt;&lt;a href="{{post.link}}"&gt;{{post.title}}&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="{{ post.link }}"&gt;{{ post.title }}&lt;/a&gt;&lt;/li&gt;
     {% endfor %}
     &lt;/ul&gt;
 </code></pre>
@@ -353,11 +353,11 @@
 </code></pre>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>&lt;h2&gt;{{term_page.name}} Archives&lt;/h2&gt;
+<pre class="highlight plaintext"><code>&lt;h2&gt;{{ term_page.name }} Archives&lt;/h2&gt;
 &lt;h3&gt;Teams&lt;/h3&gt;
 &lt;ul&gt;
-    &lt;li&gt;{{st_louis.name}} - {{st_louis.description}}&lt;/li&gt;
-    &lt;li&gt;{{team.name}} - {{team.description}}&lt;/li&gt;
+    &lt;li&gt;{{ st_louis.name }} - {{ st_louis.description }}&lt;/li&gt;
+    &lt;li&gt;{{ team.name }} - {{ team.description }}&lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
 

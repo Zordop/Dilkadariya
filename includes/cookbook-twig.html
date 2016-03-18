@@ -37,7 +37,7 @@
 
 <p>Imagine this scenario, I let the users set this in the Admin panel:
 <code class="prettyprint">
-Copyright {{year}} by Upstatement, LLC. All Rights Reserved
+Copyright {{ year }} by Upstatement, LLC. All Rights Reserved
 </code>
 But on the site I want it to render as:
 <code class="prettyprint">
@@ -47,7 +47,7 @@ Ready? There are a bunch of ways, but my favorite is:</p>
 
 <h4 id="in-your-php-file">In your PHP file</h4>
 <pre class="highlight php"><code>$data['year'] = date('Y');
-$data['copyright'] = get_option("footer_message"); //"Copyright {{year}} by Upstatement, LLC. All Rights Reserved"
+$data['copyright'] = get_option("footer_message"); //"Copyright {{ year }} by Upstatement, LLC. All Rights Reserved"
 render_twig('footer.twig', $data);
 </code></pre>
 

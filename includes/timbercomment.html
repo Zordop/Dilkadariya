@@ -43,8 +43,8 @@
 </code></pre>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>&lt;p class="comment"&gt;{{comment_of_the_day.content}}&lt;/p&gt;
-&lt;p class="comment-attribution"&gt;- {{comment.author.name}}&lt;/p&gt;
+<pre class="highlight plaintext"><code>&lt;p class="comment"&gt;{{ comment_of_the_day.content }}&lt;/p&gt;
+&lt;p class="comment-attribution"&gt;- {{ comment.author.name }}&lt;/p&gt;
 </code></pre>
 
 <h6 id="html">HTML</h6>
@@ -151,7 +151,7 @@
 <pre class="highlight plaintext"><code>    &lt;h3&gt;Comments by...&lt;/h3&gt;
     &lt;ol&gt;
     {% for comment in post.comments %}
-        &lt;li&gt;{{comment.author.name}}, who is a {{comment.author.role}}&lt;/li&gt;
+        &lt;li&gt;{{ comment.author.name }}, who is a {{ comment.author.role }}&lt;/li&gt;
     {% endfor %}
     &lt;/ol&gt;
 </code></pre>
@@ -193,7 +193,7 @@
 </tbody></table>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>    &lt;img src="{{comment.avatar(36,template_uri~"/img/dude.jpg")}}" alt="Image of {{comment.author.name}}" /&gt;
+<pre class="highlight plaintext"><code>    &lt;img src="{{ comment.avatar(36,template_uri~"/img/dude.jpg") }}" alt="Image of {{ comment.author.name }}" /&gt;
 </code></pre>
 
 <h6 id="html">HTML</h6>
@@ -342,8 +342,8 @@
 </code></pre>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>&lt;p class="comment"&gt;{{comment_of_the_day.content}}&lt;/p&gt;
-&lt;p class="comment-attribution"&gt;- {{comment.author.name}}&lt;/p&gt;
+<pre class="highlight plaintext"><code>&lt;p class="comment"&gt;{{ comment_of_the_day.content }}&lt;/p&gt;
+&lt;p class="comment-attribution"&gt;- {{ comment.author.name }}&lt;/p&gt;
 </code></pre>
 
 <h6 id="html">HTML</h6>

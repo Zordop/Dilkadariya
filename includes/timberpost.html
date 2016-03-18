@@ -48,9 +48,9 @@
 <h6 id="twig">Twig</h6>
 <pre class="highlight plaintext"><code>{# single.twig #}
 &lt;article&gt;
-    &lt;h1 class="headline"&gt;{{post.title}}&lt;/h1&gt;
+    &lt;h1 class="headline"&gt;{{ post.title }}&lt;/h1&gt;
     &lt;div class="body"&gt;
-        {{post.content}}
+        {{ post.content }}
     &lt;/div&gt;
 &lt;/article&gt;
 </code></pre>
@@ -227,7 +227,7 @@
 
 <p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
 
-<p>Outputs the title of the post if you do something like <code class="prettyprint">&lt;h1&gt;{{post}}&lt;/h1&gt;</code></p>
+<p>Outputs the title of the post if you do something like <code class="prettyprint">&lt;h1&gt;{{ post }}&lt;/h1&gt;</code></p>
 
 <h2 id="author">author</h2>
 
@@ -238,9 +238,9 @@
 <p>Return the author of a post</p>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>    &lt;h1&gt;{{post.title}}&lt;/h1&gt;
+<pre class="highlight plaintext"><code>    &lt;h1&gt;{{ post.title }}&lt;/h1&gt;
     &lt;p class="byline"&gt;
-        &lt;a href="{{post.author.link}}"&gt;{{post.author.name}}&lt;/a&gt;
+        &lt;a href="{{ post.author.link }}"&gt;{{post.author.name}}&lt;/a&gt;
     &lt;/p&gt;
 </code></pre>
 
@@ -342,9 +342,9 @@
 <pre class="highlight plaintext"><code>    {# single.twig #}
     &lt;h4&gt;Comments:&lt;/h4&gt;
     {% for comment in post.comments %}
-        &lt;div class="comment-{{comment.ID}} comment-order-{{loop.index}}"&gt;
-            &lt;p&gt;{{comment.author.name}} said:&lt;/p&gt;
-            &lt;p&gt;{{comment.content}}&lt;/p&gt;
+        &lt;div class="comment-{{ comment.ID }} comment-order-{{ loop.index }}"&gt;
+            &lt;p&gt;{{ comment.author.name }} said:&lt;/p&gt;
+            &lt;p&gt;{{ comment.content }}&lt;/p&gt;
         &lt;/div&gt;
     {% endfor %}
 </code></pre>
@@ -373,7 +373,7 @@
 
 <h6 id="twig">Twig</h6>
 <pre class="highlight plaintext"><code>    &lt;div class="article"&gt;
-        &lt;h2&gt;{{post.title}}&lt;/h2&gt;
+        &lt;h2&gt;{{ post.title }}&lt;/h2&gt;
         &lt;div class="content"&gt;{{ post.content }}&lt;/div&gt;
     &lt;/div&gt;
 </code></pre>
@@ -458,7 +458,7 @@
 </tbody></table>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>    &lt;div class="article-text"&gt;{{post.get_content}}&lt;/div&gt;
+<pre class="highlight plaintext"><code>    &lt;div class="article-text"&gt;{{ post.get_content }}&lt;/div&gt;
 </code></pre>
 
 <h6 id="html">HTML</h6>
@@ -584,7 +584,7 @@
 </tbody></table>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>    &lt;p&gt;{{post.get_preview(50)}}&lt;/p&gt;
+<pre class="highlight plaintext"><code>    &lt;p&gt;{{ post.get_preview(50) }}&lt;/p&gt;
 </code></pre>
 
 <h2 id="has_term">has_term</h2>
@@ -641,7 +641,7 @@
 <p>get the permalink for a post object</p>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>    &lt;a href="{{post.link}}"&gt;Read my post&lt;/a&gt;
+<pre class="highlight plaintext"><code>    &lt;a href="{{ post.link }}"&gt;Read my post&lt;/a&gt;
 </code></pre>
 
 <h2 id="meta">meta</h2>
@@ -779,7 +779,7 @@
 <p>Gets the relative path of a WP Post, so while link() will return http://example.org/2015/07/my-cool-post this will return just /2015/07/my-cool-post</p>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>    &lt;a href="{{post.path}}"&gt;{{post.title}}&lt;/a&gt;
+<pre class="highlight plaintext"><code>    &lt;a href="{{ post.path }}"&gt;{{ post.title }}&lt;/a&gt;
 </code></pre>
 
 <h2 id="permalink"><strike>permalink</strike></h2>
@@ -814,8 +814,8 @@
 
 <h6 id="twig">Twig</h6>
 <pre class="highlight plaintext"><code>    &lt;h4&gt;Prior Entry:&lt;/h4&gt;
-    &lt;h3&gt;{{post.prev.title}}&lt;/h3&gt;
-    &lt;p&gt;{{post.prev.get_preview(25)}}&lt;/p&gt;
+    &lt;h3&gt;{{ post.prev.title }}&lt;/h3&gt;
+    &lt;p&gt;{{ post.prev.get_preview(25) }}&lt;/p&gt;
 </code></pre>
 
 <h2 id="tags">tags</h2>
@@ -862,7 +862,7 @@
 <p>get the featured image as a TimberImage</p>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight plaintext"><code>    &lt;img src="{{post.thumbnail.src}}" /&gt;
+<pre class="highlight plaintext"><code>    &lt;img src="{{ post.thumbnail.src }}" /&gt;
 </code></pre>
 
 <h2 id="time">time</h2>
@@ -979,9 +979,9 @@
 <h6 id="twig">Twig</h6>
 <pre class="highlight plaintext"><code>{# single.twig #}
 &lt;article&gt;
-    &lt;h1 class="headline"&gt;{{post.title}}&lt;/h1&gt;
+    &lt;h1 class="headline"&gt;{{ post.title }}&lt;/h1&gt;
     &lt;div class="body"&gt;
-        {{post.content}}
+        {{ post.content }}
     &lt;/div&gt;
 &lt;/article&gt;
 </code></pre>

@@ -35,12 +35,12 @@
 
 <p>Timber is designed to play nicely with (the amazing) <a href="http://www.advancedcustomfields.com/">Advanced Custom Fields</a>. It&rsquo;s not a requirement, of course.</p>
 
-<p>While data saved by ACF is available via <code class="prettyprint">{{post.my_acf_field}}</code> you will often need to do some additional work to get back the <em>kind</em> of data you want. For example, images are stored as image ID#s which you might want to translate into a specific image object. Read on to learn more about those specific exceptions.</p>
+<p>While data saved by ACF is available via <code class="prettyprint">{{ post.my_acf_field }}</code> you will often need to do some additional work to get back the <em>kind</em> of data you want. For example, images are stored as image ID#s which you might want to translate into a specific image object. Read on to learn more about those specific exceptions.</p>
 
 <h3 id="wysiwyg-field-and-other-requiring-text">WYSIWYG field (and other requiring text):</h3>
-<pre class="highlight plaintext"><code>&lt;h3&gt;{{post.title}}&lt;/h3&gt;
+<pre class="highlight plaintext"><code>&lt;h3&gt;{{ post.title }}&lt;/h3&gt;
 &lt;div class="intro-text"&gt;
-     {{post.get_field('my_wysiwyg_field')}}
+     {{ post.get_field('my_wysiwyg_field') }}
 &lt;/div&gt;
 </code></pre>
 
@@ -51,7 +51,7 @@
 <p>You can retrieve an image from a custom field, then use it in a Twig template. The most reliable approach is this: When setting up your custom fields you&rsquo;ll want to save the <code class="prettyprint">image_id</code> to the field. The image object, url, etc. <em>will</em> work but it&rsquo;s not as fool-proof.</p>
 
 <h5 id="the-quick-way-for-most-situations">The quick way (for most situations)</h5>
-<pre class="highlight plaintext"><code>&lt;img src="{{TimberImage(post.get_field('hero_image')).src}}" /&gt;
+<pre class="highlight plaintext"><code>&lt;img src="{{ TimberImage(post.get_field('hero_image')).src }}" /&gt;
 </code></pre>
 
 <h5 id="the-long-way-for-some-special-situations">The long way (for some special situations)</h5>
@@ -70,7 +70,7 @@ Timber::render('single.twig', $data);
 <p><code class="prettyprint">TimberImage</code> should be initialized using a WordPress image ID#. It can also take URLs and image objects, but that requires extra processing.</p>
 
 <p>You can now use all the above functions to transform your custom images in the same way, the format will be:</p>
-<pre class="highlight plaintext"><code>&lt;img src="{{post.hero_image.src|resize(500, 300)}}" /&gt;
+<pre class="highlight plaintext"><code>&lt;img src="{{ post.hero_image.src|resize(500, 300) }}" /&gt;
 </code></pre>
 
 <hr>
@@ -80,13 +80,13 @@ Timber::render('single.twig', $data);
 <p>You can access repeater fields within in twig files:
 <code class="prettyprint">twig
 {# single.twig #}
-&lt;h2&gt;{{post.title}}&lt;/h2&gt;
+&lt;h2&gt;{{ post.title }}&lt;/h2&gt;
 &lt;div class=&quot;my-list&quot;&gt;
     {% for item in post.get_field(&#39;my_repeater&#39;) %}
         &lt;div class=&quot;item&quot;&gt;
-            &lt;h4&gt;{{item.name}}&lt;/h4&gt;
-            &lt;h6&gt;{{item.info}}&lt;/h6&gt;
-            &lt;img src=&quot;{{TimberImage(item.picture).src}}&quot; /&gt;
+            &lt;h4&gt;{{ item.name }}&lt;/h4&gt;
+            &lt;h6&gt;{{ item.info }}&lt;/h6&gt;
+            &lt;img src=&quot;{{ TimberImage(item.picture).src }}&quot; /&gt;
         &lt;/div&gt;
     {% endfor %}
 &lt;/div&gt;
@@ -96,10 +96,10 @@ Timber::render('single.twig', $data);
 
 <p>When you run <code class="prettyprint">get_field</code> on an outer ACF field, everything inside is ready to be traversed. You can refer to nested fields via outer_item.inner_repeater</p>
 <pre class="highlight plaintext"><code>{% for item_outer in post.get_field('outer') %}
-     {{item_outer.title}}
+     {{ item_outer.title }}
 
      {% for item_inner in item_outer.inner_repeater %}
-          {{item_inner.title}}
+          {{ item_inner.title }}
      {% endfor %}
 
 {% endfor %}
@@ -113,7 +113,7 @@ Timber::render('single.twig', $data);
 <pre class="highlight plaintext"><code>{% for gear in post.get_field('gear_items') %}
     &lt;h3&gt; {{ gear.brand_name }} &lt;/h3&gt;
     {% for gear_feature in gear.get_field('features') %}
-        &lt;li&gt; {{gear_feature}} &lt;/li&gt;
+        &lt;li&gt; {{ gear_feature }} &lt;/li&gt;
     {% endfor %}
 {% endfor %}
 </code></pre>
@@ -122,7 +122,7 @@ Timber::render('single.twig', $data);
 <pre class="highlight plaintext"><code>{% for gear in post.get_field('gear_items') %}
     &lt;h3&gt; {{ gear.brand_name }} &lt;/h3&gt;
     {% for gear_feature in gear.features %}
-        &lt;li&gt; {{gear_feature}} &lt;/li&gt;
+        &lt;li&gt; {{ gear_feature }} &lt;/li&gt;
     {% endfor %}
 {% endfor %}
 </code></pre>
@@ -134,12 +134,12 @@ Timber::render('single.twig', $data);
 <p>Similar to repeaters, get the field by the name of the flexible content field:</p>
 <pre class="highlight plaintext"><code>{% for media_item in post.get_field('media_set') %}
     {% if media_item.acf_fc_layout == 'image_set' %}
-        &lt;img src="{{TimberImage(media_item.image).src}}" /&gt;
-        &lt;p class="caption"&gt;{{TimberImage(media_item.image).caption}}&lt;/p&gt;
-        &lt;aside class="notes"&gt;{{media_item.notes}}&lt;/aside&gt;
+        &lt;img src="{{ TimberImage(media_item.image).src }}" /&gt;
+        &lt;p class="caption"&gt;{{ TimberImage(media_item.image).caption }}&lt;/p&gt;
+        &lt;aside class="notes"&gt;{{ media_item.notes }}&lt;/aside&gt;
     {% elseif media_item.acf_fc_layout == 'video_set' %}
-        &lt;iframe width="560" height="315" src="http://www.youtube.com/embed/{{media_item.youtube_id}}" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
-        &lt;p class="caption"&gt;{{media_item.caption}}&lt;/p&gt;
+        &lt;iframe width="560" height="315" src="http://www.youtube.com/embed/{{ media_item.youtube_id }}" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+        &lt;p class="caption"&gt;{{ media_item.caption }}&lt;/p&gt;
     {% endif %}
 {% endfor %}
 </code></pre>
@@ -150,7 +150,7 @@ Timber::render('single.twig', $data);
 <pre class="highlight php"><code>    $context['site_copyright_info'] = get_field('copyright_info', 'options');
     Timber::render('index.twig', $context);
 </code></pre>
-<pre class="highlight plaintext"><code>    &lt;footer&gt;{{site_copyright_info}}&lt;/footer&gt;
+<pre class="highlight plaintext"><code>    &lt;footer&gt;{{ site_copyright_info }}&lt;/footer&gt;
 </code></pre>
 
 <h6 id="get-all-info-from-your-options-page">Get all info from your options page</h6>
@@ -159,7 +159,7 @@ Timber::render('single.twig', $data);
 </code></pre>
 
 <p>ACF Pro has a built in options page, and changes the <code class="prettyprint">get_fields(&#39;options&#39;)</code> to <code class="prettyprint">get_fields(&#39;option&#39;)</code>.</p>
-<pre class="highlight plaintext"><code>    &lt;footer&gt;{{options.copyright_info}}&lt;/footer&gt;
+<pre class="highlight plaintext"><code>    &lt;footer&gt;{{ options.copyright_info }}&lt;/footer&gt;
 </code></pre>
 
 <h6 id="use-options-info-site-wide">Use options info site wide</h6>
@@ -176,7 +176,7 @@ function mytheme_timber_context( $context ) {
 
 <p>Now, you can use any of the option fields across the site instead of per template.</p>
 <pre class="highlight plaintext"><code>/* footer.twig */
-&lt;footer&gt;{{options.copyright_info}}&lt;/footer&gt;
+&lt;footer&gt;{{ options.copyright_info }}&lt;/footer&gt;
 </code></pre>
 
 <hr>

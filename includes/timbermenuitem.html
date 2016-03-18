@@ -230,8 +230,8 @@
 <h6 id="twig">Twig</h6>
 <pre class="highlight plaintext"><code>    &lt;ul&gt;
         {% for item in menu.items %}
-            &lt;li class="{{item.slug}}"&gt;
-                &lt;a href="{{item.link}}"&gt;{{item.name}}&lt;/a&gt;
+            &lt;li class="{{ item.slug }}"&gt;
+                &lt;a href="{{ item.link }}"&gt;{{ item.name }}&lt;/a&gt;
              &lt;/li&gt;
         {% endfor %}
     &lt;/ul&gt;

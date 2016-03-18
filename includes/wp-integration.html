@@ -52,11 +52,11 @@
 
 <p>You&rsquo;re probably used to calling <code class="prettyprint">the_content()</code> in your theme file. This is good. Before outputting, WordPress will run all the filters and actions that your plugins and themes are using. If you want to get this into your new Timber theme (and you probably do). Call it like this:</p>
 <pre class="highlight php"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"my-article"</span><span class="nt">&gt;</span>
-   {{post.content}}
+   {{ post.content }}
 <span class="nt">&lt;/div&gt;</span>
 </code></pre>
 
-<p>This differs from <code class="prettyprint">{{post.post_content}}</code> which is the raw text stored in your database</p>
+<p>This differs from <code class="prettyprint">{{ post.post_content }}</code> which is the raw text stored in your database</p>
 
 <hr>
 
@@ -82,15 +82,15 @@ Timber::render('single.twig', $data);
 <span class="nt">&lt;html&gt;</span>
     <span class="nt">&lt;head&gt;</span>
     <span class="c">&lt;!-- Add whatever you need in the head, and then...--&gt;</span>
-    {{wp_head}}
+    {{ wp_head }}
     <span class="nt">&lt;/head&gt;</span>
 
     <span class="c">&lt;!-- etc... --&gt;</span>
 
     <span class="nt">&lt;footer&gt;</span>
-        Copyright <span class="ni">&amp;copy;</span> {{"now"|date('Y')}}
+        Copyright <span class="ni">&amp;copy;</span> {{ "now"|date('Y') }}
     <span class="nt">&lt;/footer&gt;</span>
-    {{wp_footer}}
+    {{ wp_footer }}
     <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
 </code></pre>
@@ -106,20 +106,20 @@ Timber::render('single.twig', $data);
 <p>No.</p>
 
 <p>Let&rsquo;s say you modified twentyeleven and need some of the functions back. Here&rsquo;s the quick-and-dirty way:</p>
-<pre class="highlight php"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"posted-on"</span><span class="nt">&gt;</span>{{function("twentyeleven_posted_on")}}<span class="nt">&lt;/div&gt;</span>
+<pre class="highlight php"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"posted-on"</span><span class="nt">&gt;</span>{{ function("twentyeleven_posted_on") }}<span class="nt">&lt;/div&gt;</span>
 </code></pre>
 
 <p>Oh. That&rsquo;s not so bad. What if there are arguments? Easy:</p>
 <pre class="highlight php"><code>{# single.twig #}
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"admin-tools"</span><span class="nt">&gt;</span>
-    {{function('edit_post_link', 'Edit', '<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"edit-link"</span><span class="nt">&gt;</span>', '<span class="nt">&lt;/span&gt;</span>')}}
+    {{ function('edit_post_link', 'Edit', '<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"edit-link"</span><span class="nt">&gt;</span>', '<span class="nt">&lt;/span&gt;</span>') }}
 <span class="nt">&lt;/div&gt;</span>
 </code></pre>
 
 <p>Nice! Any gotchas? Unfortunately yes. While the above example will totally work in a single.twig file it will not in a loop. Why? Single.twig/single.php retain the context of the current post. Thus for a function like <code class="prettyprint">edit_post_link</code> (which will try to guess the ID# of the post you want to edit, based on the current post in the loop), the same function requires some modification in a file like <code class="prettyprint">archive.twig</code> or <code class="prettyprint">index.twig</code>. There, you will need to explicitly set the post ID:</p>
 <pre class="highlight php"><code>{# index.twig #}
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"admin-tools"</span><span class="nt">&gt;</span>
-    {{function('edit_post_link', 'Edit', '<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"edit-link"</span><span class="nt">&gt;</span>', '<span class="nt">&lt;/span&gt;</span>', post.ID)}}
+    {{ function('edit_post_link', 'Edit', '<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"edit-link"</span><span class="nt">&gt;</span>', '<span class="nt">&lt;/span&gt;</span>', post.ID) }}
 <span class="nt">&lt;/div&gt;</span>
 </code></pre>
 
@@ -143,7 +143,7 @@ TimberHelper::function_wrapper('Example\Class', 'function_in_class');
 TimberHelper::function_wrapper($this, 'function_in_class');
 </code></pre>
 
-<p>You can then call the function like so <code class="prettyprint">{{function_in_class}}</code></p>
+<p>You can then call the function like so <code class="prettyprint">{{ function_in_class }}</code></p>
 
 <p>So if you want to add <code class="prettyprint">edit_post_link</code> to your context, you can do something like this:</p>
 <pre class="highlight php"><code>/* single.php */
@@ -156,13 +156,13 @@ Timber::render('single.twig', $data);
 <p>Now you can use it like a &lsquo;normal&rsquo; function:</p>
 <pre class="highlight php"><code>{# single.twig #}
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"admin-tools"</span><span class="nt">&gt;</span>
-    {{edit_post_link}}
+    {{ edit_post_link }}
 <span class="nt">&lt;/div&gt;</span>
 {# Calls edit_post_link using default arguments #}
 
 {# single-my-post-type.twig #}
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"admin-tools"</span><span class="nt">&gt;</span>
-    {{edit_post_link(null, '<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"edit-my-post-type-link"</span><span class="nt">&gt;</span>')}}
+    {{ edit_post_link(null, '<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"edit-my-post-type-link"</span><span class="nt">&gt;</span>') }}
 <span class="nt">&lt;/div&gt;</span>
 {# Calls edit_post_link with all defaults, except for second argument #}
 </code></pre>
@@ -221,7 +221,7 @@ Of course they do&hellip;</p>
 <p>Then use it in your template:</p>
 <pre class="highlight php"><code>{# base.twig #}
 <span class="nt">&lt;footer&gt;</span>
-    {{footer_widgets}}
+    {{ footer_widgets }}
 <span class="nt">&lt;/footer&gt;</span>
 </code></pre>
 

@@ -45,21 +45,21 @@
 <p>You can then markup the output like so  (of course, the exact markup is up to YOU):</p>
 <pre class="highlight plaintext"><code>&lt;div class="tool-pagination"&gt;
     {% if pagination.prev %}
-        &lt;a href="{{pagination.prev.link}}" class="prev {{pagination.prev.link|length ? '' : 'invisible'}}"&gt;Prev&lt;/a&gt;
+        &lt;a href="{{ pagination.prev.link }}" class="prev {{ pagination.prev.link|length ? '' : 'invisible' }}"&gt;Prev&lt;/a&gt;
     {% endif %}
     &lt;ul class="pages"&gt;
         {% for page in pagination.pages %}
             &lt;li&gt;
                 {% if page.link %}
-                    &lt;a href="{{page.link}}" class="{{page.class}}"&gt;{{page.title}}&lt;/a&gt;
+                    &lt;a href="{{ page.link }}" class="{{ page.class }}"&gt;{{ page.title }}&lt;/a&gt;
                 {% else %}
-                    &lt;span class="{{page.class}}"&gt;{{page.title}}&lt;/span&gt;
+                    &lt;span class="{{ page.class }}"&gt;{{ page.title }}&lt;/span&gt;
                 {% endif %}
             &lt;/li&gt;
         {% endfor %}
     &lt;/ul&gt;
     {% if pagination.next %}
-        &lt;a href="{{pagination.next.link}}" class="next {{pagination.next.link|length ? '' : 'invisible'}}"&gt;Next&lt;/a&gt;
+        &lt;a href="{{ pagination.next.link }}" class="next {{ pagination.next.link|length ? '' : 'invisible' }}"&gt;Next&lt;/a&gt;
     {% endif %}
 &lt;/div&gt;
 </code></pre>

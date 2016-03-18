@@ -112,7 +112,7 @@ if (is_singular('product')) {
 
     {% do action('woocommerce_before_single_product') %}
 
-    &lt;article itemscope itemtype="http://schema.org/Product" class="single-product-details {{post.class}}"&gt;
+    &lt;article itemscope itemtype="http://schema.org/Product" class="single-product-details {{ post.class }}"&gt;
 
         &lt;div class="entry-images"&gt;
             {% do action('woocommerce_before_single_product_summary') %}
@@ -149,7 +149,7 @@ If you need to override the output of any of those hooks, my advice would be to 
 
         {% if showthumb %}
             &lt;div class="Media-figure {% if not post.thumbnail %}placeholder{% endif %}"&gt;
-                &lt;a href="{{post.link}}"&gt;
+                &lt;a href="{{ post.link }}"&gt;
                     {% if post.thumbnail %}
                         &lt;img src="{{ post.thumbnail.src|resize(post_thumb_size[0], post_thumb_size[1]) }}" /&gt;
                     {% else %}
@@ -162,9 +162,9 @@ If you need to override the output of any of those hooks, my advice would be to 
         &lt;div class="Media-content"&gt;
             {% do action('woocommerce_before_shop_loop_item_title') %}
             {% if post.title %}
-                &lt;h3 class="entry-title"&gt;&lt;a href="{{post.link}}"&gt;{{ post.title }}&lt;/a&gt;&lt;/h3&gt;
+                &lt;h3 class="entry-title"&gt;&lt;a href="{{ post.link }}"&gt;{{ post.title }}&lt;/a&gt;&lt;/h3&gt;
             {% else %}
-                &lt;h3 class="entry-title"&gt;&lt;a href="{{post.link}}"&gt;{{ fn('the_title') }}&lt;/a&gt;&lt;/h3&gt;
+                &lt;h3 class="entry-title"&gt;&lt;a href="{{ post.link }}"&gt;{{ fn('the_title') }}&lt;/a&gt;&lt;/h3&gt;
             {% endif %}
             {% do action( 'woocommerce_after_shop_loop_item_title' ) %}
             {% do action( 'woocommerce_after_shop_loop_item' ) %}

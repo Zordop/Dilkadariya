@@ -42,7 +42,7 @@
 </code></pre>
 
 <h5 id="single-twig">single.twig</h5>
-<pre class="highlight html"><code>{{dump(post)}}
+<pre class="highlight html"><code>{{ dump(post) }}
 </code></pre>
 
 <p>Which will give you:</p>
@@ -50,7 +50,7 @@
 <p><a href="http://imgur.com/5Xu53Fk"><img src="http://i.imgur.com/5Xu53Fk.png" title="Hosted by imgur.com"/></a></p>
 
 <p>You can also dump <em>everything</em> sent to your template via:</p>
-<pre class="highlight html"><code>{{dump()}}
+<pre class="highlight html"><code>{{ dump() }}
 </code></pre>
 
 <p>This will give you something like:</p>
@@ -67,7 +67,7 @@
 
 <p>You can also use some quick filters on an object. These are legacy and will be removed in favor of using Twig&rsquo;s built-in functionality. However, these do not require that WP_DEBUG be turned on.
 <code class="prettyprint">html
-    {{post|print_r}}
+    {{ post|print_r }}
 </code></p>
 
       </div>
