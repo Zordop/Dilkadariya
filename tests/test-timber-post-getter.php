@@ -200,9 +200,24 @@ class TestTimberPostGetter extends Timber_UnitTestCase {
 		$this->assertEquals(4, count($personPostsString));
 	}
 
-	function testGetPostOfPost() {
+	function testNewPostOfPost() {
 		$pid = $this->factory->post->create(array('post_title' => 'My Post'));
 		$post = new TimberPost($pid);
+		$this->assertEquals($pid, $post->id);
+		$this->assertEquals('My Post', $post->title());
+	}
+
+	function testNewPostOfCustomType() {
+		register_post_type('product');
+		$pid = $this->factory->post->create(array('post_type' => 'product', 'post_title' => 'My Product'));
+		$product = new TimberPost($pid);
+		$this->assertEquals($pid, $product->id);
+		$this->assertEquals('My Product', $product->title());
+	}
+
+	function testGetPostOfPost() {
+		$pid = $this->factory->post->create(array('post_title' => 'My Post'));
+		$post = Timber::get_post($pid);
 		$this->assertEquals($pid, $post->id);
 		$this->assertEquals('My Post', $post->title());
 	}
@@ -210,7 +225,7 @@ class TestTimberPostGetter extends Timber_UnitTestCase {
 	function testGetPostOfCustomType() {
 		register_post_type('product');
 		$pid = $this->factory->post->create(array('post_type' => 'product', 'post_title' => 'My Product'));
-		$product = new TimberPost($pid);
+		$product = Timber::get_post($pid);
 		$this->assertEquals($pid, $product->id);
 		$this->assertEquals('My Product', $product->title());
 	}
