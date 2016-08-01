@@ -62,11 +62,11 @@ class PostGetter {
 		if ( is_array($query) && count($query) && isset($query[0]) && is_object($query[0]) ) {
 			// We have an array of post objects that already have data
 			return new PostsCollection($query, $PostClass);
-		} else {
-			// We have a query (of sorts) to work with
-			$tqi = new QueryIterator($query, $PostClass);
-			return $tqi;
 		}
+			
+		// We now have a query (of sorts) to work with
+		$tqi = new QueryIterator($query, $PostClass);
+		return $tqi;
 	}
 
 	/**

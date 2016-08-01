@@ -35,6 +35,10 @@ class QueryIterator implements \Iterator {
 			$the_query = & $wp_query;
 			//if we're on a custom posts page?
 			$the_query = self::handle_maybe_custom_posts_page($the_query);
+			// if ( !$query ) {
+			// 	//still nothing — on a single page?
+			// 	$the_query = self::handle_default_query($the_query);
+			// }
 		} elseif ( Helper::is_array_assoc($query) || (is_string($query) && strstr($query, '=')) ) {
 			// We have a regularly formed WP query string or array to use
 			$the_query = new \WP_Query($query);
@@ -56,7 +60,6 @@ class QueryIterator implements \Iterator {
 			// We have failed hard, at least let get something.
 			$the_query = new \WP_Query();
 		}
-
 		$this->_query = $the_query;
 
 	}
@@ -162,6 +165,24 @@ class QueryIterator implements \Iterator {
 			}
 		}
 		return $query;
+	}
+
+	public static function handle_default_query( $query ) {
+		$defaults = array(
+			'numberposts' => 5,
+			'category' => 0, 'orderby' => 'date',
+			'order' => 'DESC', 'include' => array(),
+			'exclude' => array(), 'meta_key' => '',
+			'meta_value' =>'', 'post_type' => 'post',
+  			'suppress_filters' => true
+ 		);
+ 		return new \WP_Query($defaults);
+	}
+
+	protected static function handle_maybe_single_page( $query ) {
+		if ( isset($query->query['p']) ) {
+			return new \WP_Query(array('p' => $query->query['p']));
+		}
 	}
 
 }

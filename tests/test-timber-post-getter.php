@@ -2,6 +2,26 @@
 
 class TestTimberPostGetter extends Timber_UnitTestCase {
 
+	function testPagePHPPosts() {
+		$posts = array();
+		$posts[] = $this->factory->post->create_many(4);
+		$pid = $this->factory->post->create( array('post_type' => 'page', 'post_title' => 'About') );
+		$this->go_to( home_url( '/?p='.$pid ) );
+		$wp_posts = get_posts();
+		$timber_posts = Timber::get_posts();
+		$this->assertEquals(4, count($wp_posts));
+		$this->assertEquals(4, count($timber_posts));
+	}
+
+	// function testPagePHPPost() {
+	// 	$pids = $this->factory->post->create_many(6);
+	// 	$pid = $this->factory->post->create( array('post_type' => 'page', 'post_title' => 'About') );
+	// 	$this->go_to( home_url( '/?p='.$pid ) );
+	// 	$timber_post = Timber::get_post(array('p' => $pid));
+	// 	print_r($timber_post);
+	// 	$this->assertEquals($pid, $timber_post->ID);
+	// }
+
 	function testGettingArrayWithSticky(){
 		$pids = $this->factory->post->create_many(6);
 		$sticky_id = $this->factory->post->create();
