@@ -861,7 +861,7 @@
 
           <h1 id="cheatsheet">Cheatsheet</h1>
 
-<p>Here are some helpful conversions for functions you&rsquo;re probably well familiar with in WordPress and their Timber equivalents. These assume a PHP file with the <code class="prettyprint">Timber::get_context();</code> function at the top. For example:</p>
+<p>Here&rsquo;re some helpful conversions for functions you&rsquo;re probably well familiar with in WordPress and their Timber equivalents. These assume a PHP file with the <code class="prettyprint">Timber::get_context();</code> function at the top. For example:</p>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$context</span> <span class="o">=</span> <span class="nx">Timber</span><span class="o">::</span><span class="na">get_context</span><span class="p">();</span>
 <span class="nv">$context</span><span class="p">[</span><span class="s1">'post'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimberPost</span><span class="p">();</span>
@@ -2567,16 +2567,6 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 <td></td>
 </tr>
 <tr>
-<td><a href="#get_calling_script_dir">get_calling_script_dir</a></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#get_calling_script_file">get_calling_script_file</a></td>
-<td>string/null</td>
-<td></td>
-</tr>
-<tr>
 <td><a href="#get_context">get_context</a></td>
 <td>array</td>
 <td></td>
@@ -2794,52 +2784,6 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </tr>
 </tbody></table>
 
-<h2 id="get_calling_script_dir">get_calling_script_dir</h2>
-
-<p><code class="prettyprint">get_calling_script_dir( mixed $offset )</code></p>
-
-<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
-
-<p>Get calling script dir.</p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>$offset</td>
-<td>mixed</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="get_calling_script_file"><strike>get_calling_script_file</strike></h2>
-
-<p><strong>DEPRECATED</strong> since 0.20.0</p>
-
-<p><code class="prettyprint">get_calling_script_file( mixed $offset )</code></p>
-
-<p><strong>returns:</strong> <code class="prettyprint">string/null</code> </p>
-
-<p>Get calling script file.</p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>$offset</td>
-<td>mixed</td>
-<td></td>
-</tr>
-</tbody></table>
-
 <h2 id="get_context">get_context</h2>
 
 <p><code class="prettyprint">get_context( )</code></p>
@@ -2939,7 +2883,7 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 
 <h2 id="get_sidebar">get_sidebar</h2>
 
-<p><code class="prettyprint">get_sidebar( string $sidebar=&quot;&quot;, array $data=array() )</code></p>
+<p><code class="prettyprint">get_sidebar( string $sidebar=&quot;sidebar.php&quot;, array $data=array() )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">bool/string</code> </p>
 
@@ -6055,12 +5999,12 @@ Gets the public label for the menu item
 
           <h1 id="timber-user">Timber\User</h1>
 
-<p>This is used in Timber to represent users retrived from WordPress. You can call <code class="prettyprint">$my_user = new TimberUser(123);</code> directly, or access it through the <code class="prettyprint">{{ post.author }}</code> method.</p>
+<p>This is used in Timber to represent users retrived from WordPress. You can call <code class="prettyprint">$my_user = new Timber\User(123);</code> directly, or access it through the <code class="prettyprint">{{ post.author }}</code> method.</p>
 
 <h6 id="php">PHP</h6>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
-<span class="nv">$context</span><span class="p">[</span><span class="s1">'current_user'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimberUser</span><span class="p">();</span>
-<span class="nv">$context</span><span class="p">[</span><span class="s1">'post'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimberPost</span><span class="p">();</span>
+<span class="nv">$context</span><span class="p">[</span><span class="s1">'current_user'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Timber\User</span><span class="p">();</span>
+<span class="nv">$context</span><span class="p">[</span><span class="s1">'post'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Timber\Post</span><span class="p">();</span>
 <span class="nx">Timber</span><span class="o">::</span><span class="na">render</span><span class="p">(</span><span class="s1">'single.twig'</span><span class="p">,</span> <span class="nv">$context</span><span class="p">);</span>
 </code></pre>
 
@@ -6331,7 +6275,7 @@ Gets the public label for the menu item
 
 <h2 id="error_log">error_log</h2>
 
-<p><code class="prettyprint">error_log( mixed $arg )</code></p>
+<p><code class="prettyprint">error_log( mixed $error )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
 
@@ -6343,9 +6287,9 @@ Gets the public label for the menu item
 </tr>
 </thead><tbody>
 <tr>
-<td>$arg</td>
+<td>$error</td>
 <td>mixed</td>
-<td>that you want to error_log</td>
+<td></td>
 </tr>
 </tbody></table>
 
@@ -6652,9 +6596,11 @@ Gets the public label for the menu item
 </tr>
 </tbody></table>
 
-<h2 id="paginate_links">paginate_links</h2>
+<h2 id="paginate_links"><strike>paginate_links</strike></h2>
 
-<p><code class="prettyprint">paginate_links( string $args=&quot;&quot; )</code></p>
+<p><strong>DEPRECATED</strong> since 1.1.2</p>
+
+<p><code class="prettyprint">paginate_links( array $args=array() )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">array</code> </p>
 
@@ -6667,7 +6613,7 @@ Gets the public label for the menu item
 </thead><tbody>
 <tr>
 <td>$args</td>
-<td>string</td>
+<td>array</td>
 <td></td>
 </tr>
 </tbody></table>
