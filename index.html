@@ -1289,6 +1289,88 @@
 <pre class="highlight twig"><code>    <span class="cp">{{</span><span class="nv">post</span><span class="o">|</span><span class="nf">print_r</span><span class="cp">}}</span>
 </code></pre>
 
+          <h1 id="escapers">Escapers</h1>
+
+<h2 id="general-escapers">General Escapers</h2>
+
+<p>Twig offers a variety of <a href="http://twig.sensiolabs.org/doc/filters/escape.html">escapers</a> out of the box. These are intended to escape a string for safe insertion into the final output and there are multiple functions to conform to the strategy dependant on the context. In addition, Timber has added some valuable custom escapers for your WP theme. To use the escaper (see documentation link above) you use pipe your content through a function <code class="prettyprint">e</code> if you want to use a custom escaper you would supply an argument to the function, e.g. <code class="prettyprint">e(&#39;wp_kses_post&#39;)</code></p>
+
+<p>This all follows the WordPress (and greater development philosophy) to:</p>
+
+<ol>
+<li>Never trust user input.</li>
+<li>Escape as late as possible.</li>
+<li>Escape everything from untrusted sources (like databases and users), third-parties (like Twitter), etc.</li>
+<li>Never assume anything.</li>
+<li>Never trust user input.</li>
+<li>Sanitation is okay, but validation/rejection is better.</li>
+<li>Never trust user input.</li>
+</ol>
+
+<p><a href="https://vip.wordpress.com/documentation/vip/best-practices/security/validating-sanitizing-escaping/">Relevant Documentation</a></p>
+
+<h3 id="wp_kses_post">wp_kses_post</h3>
+
+<p>Background on KSES. KSES is a recursive acronym for <code class="prettyprint">KSES Kills Evil Scripts</code>. It&rsquo;s goal is to ensure only  &ldquo;allowed&rdquo; HTML element names, attribute names and attribute values plus only sane HTML entities in the string. Allowed is based on a configuration.</p>
+
+<p>This uses ths internal WordPress method that sanitize content for allowed HTML tags for post content. The configuration used can be found by running <code class="prettyprint">wp_kses_allowed_html( &#39;post&#39; );</code> <a href="https://codex.wordpress.org/Function_Reference/wp_kses_post">WordPress Documentation</a></p>
+
+<h6 id="twig">Twig:</h6>
+
+<p><code class="prettyprint">&lt;p class=&quot;intro&quot;&gt;{{post.post_content|e(&#39;wp_kses_post&#39;)}}&lt;/p&gt;</code></p>
+
+<p>In this example, <code class="prettyprint">post.post_content</code> is:</p>
+
+<p><code class="prettyprint">&lt;div foo=&quot;bar&quot; src=&quot;bum&quot;&gt;Foo&lt;/div&gt;&lt;script&gt;DoEvilThing();&lt;/script&gt;</code></p>
+
+<h6 id="output">Output:</h6>
+
+<p><code class="prettyprint">&lt;div&gt;Foo&lt;/div&gt;DoEvilThing();</code></p>
+
+<hr>
+
+<h3 id="esc_url">esc_url</h3>
+
+<p>Uses WordPress&rsquo; internal <code class="prettyprint">esc_url</code> function on text. This should be used to sanitize URLs. <a href="https://codex.wordpress.org/Function_Reference/esc_url">WordPress Documentation</a></p>
+
+<h6 id="twig">Twig:</h6>
+
+<p><code class="prettyprint">&lt;a href=&quot;{{ post.get_field(&#39;custom_link&#39;)|e(&#39;esc_url&#39;); }}&quot;&gt;&lt;/a&gt;</code></p>
+
+<h6 id="output">Output</h6>
+
+<p><code class="prettyprint">&lt;a href=&quot;http://google.com&quot;&gt;&lt;/a&gt;</code></p>
+
+<hr>
+
+<h3 id="esc_html">esc_html</h3>
+
+<p>Escaping for HTML blocks. It converts any potentially conflicting HTML entities to their encoded equivalent to prevent them from being rendered as markup by the browser, e.g. converts &ldquo;&lt;&rdquo; to &ldquo;&lt;&rdquo; and double quotes &ldquo; to &rdquo;$quot;&ldquo;</p>
+
+<p>This is for plain old text. If your content has HTML markup you should not use <code class="prettyprint">esc_html</code> which will render the HTML as it looks in your code editor &ndash; to preserve the HTML you will want to use <code class="prettyprint">wp_kses_post</code></p>
+
+<h6 id="twig">Twig:</h6>
+
+<p><code class="prettyprint">&lt;div class=&quot;equation&quot;&gt;{{ post.get_field(&#39;equation&#39;)|e(&#39;esc_html&#39;) }}&lt;/div&gt;</code></p>
+
+<h6 id="output">Output</h6>
+
+<p><code class="prettyprint">&lt;div class=&quot;equation&quot;&gt;is x &amp;lt; y?&lt;/div&gt;</code></p>
+
+<hr>
+
+<h3 id="esc_js">esc_js</h3>
+
+<p>Escapes text strings for echoing in JS. It is intended to be used for inline JS (in a tag attribute, for example onclick=”…”). Note that the strings have to be in single quotes. The filter ‘js_escape’ is also applied.</p>
+
+<h6 id="twig">Twig:</h6>
+
+<p><code class="prettyprint">&lt;script&gt;var bar = &#39;{{ post.get_field(&#39;name&#39;) }}&#39;;&lt;/script&gt;</code></p>
+
+<h6 id="output">Output</h6>
+
+<p><code class="prettyprint">&lt;script&gt;var bar = &#39;Gabrielle&#39;;&lt;/script&gt;</code></p>
+
           <h1 id="extending-objects">Extending Objects</h1>
 
 <p>Myth: Timber is for making simple themes. Fact: It&rsquo;s for making incredibly complex themes <em>look</em> easy. But yes, you can also make simple sites from it.</p>
