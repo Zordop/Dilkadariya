@@ -861,7 +861,7 @@
 
           <h1 id="cheatsheet">Cheatsheet</h1>
 
-<p>Here are some helpful conversions for functions you&rsquo;re probably well familiar with in WordPress and their Timber equivalents. These assume a PHP file with the <code class="prettyprint">Timber::get_context();</code> function at the top. For example:</p>
+<p>Here&rsquo;re some helpful conversions for functions you&rsquo;re probably well familiar with in WordPress and their Timber equivalents. These assume a PHP file with the <code class="prettyprint">Timber::get_context();</code> function at the top. For example:</p>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$context</span> <span class="o">=</span> <span class="nx">Timber</span><span class="o">::</span><span class="na">get_context</span><span class="p">();</span>
 <span class="nv">$context</span><span class="p">[</span><span class="s1">'post'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimberPost</span><span class="p">();</span>
@@ -1288,6 +1288,88 @@
 <p>You can also use some quick filters on an object. These are legacy and will be removed in favor of using Twig&rsquo;s built-in functionality. However, these do not require that WP_DEBUG be turned on.</p>
 <pre class="highlight twig"><code>    <span class="cp">{{</span><span class="nv">post</span><span class="o">|</span><span class="nf">print_r</span><span class="cp">}}</span>
 </code></pre>
+
+          <h1 id="escapers">Escapers</h1>
+
+<h2 id="general-escapers">General Escapers</h2>
+
+<p>Twig offers a variety of <a href="http://twig.sensiolabs.org/doc/filters/escape.html">escapers</a> out of the box. These are intended to escape a string for safe insertion into the final output and there are multiple functions to conform to the strategy dependant on the context. In addition, Timber has added some valuable custom escapers for your WP theme. To use the escaper (see documentation link above) you use pipe your content through a function <code class="prettyprint">e</code> if you want to use a custom escaper you would supply an argument to the function, e.g. <code class="prettyprint">e(&#39;wp_kses_post&#39;)</code></p>
+
+<p>This all follows the WordPress (and greater development philosophy) to:</p>
+
+<ol>
+<li>Never trust user input.</li>
+<li>Escape as late as possible.</li>
+<li>Escape everything from untrusted sources (like databases and users), third-parties (like Twitter), etc.</li>
+<li>Never assume anything.</li>
+<li>Never trust user input.</li>
+<li>Sanitation is okay, but validation/rejection is better.</li>
+<li>Never trust user input.</li>
+</ol>
+
+<p><a href="https://vip.wordpress.com/documentation/vip/best-practices/security/validating-sanitizing-escaping/">Relevant Documentation</a></p>
+
+<h3 id="wp_kses_post">wp_kses_post</h3>
+
+<p>Background on KSES. KSES is a recursive acronym for <code class="prettyprint">KSES Kills Evil Scripts</code>. It&rsquo;s goal is to ensure only  &ldquo;allowed&rdquo; HTML element names, attribute names and attribute values plus only sane HTML entities in the string. Allowed is based on a configuration.</p>
+
+<p>This uses ths internal WordPress method that sanitize content for allowed HTML tags for post content. The configuration used can be found by running <code class="prettyprint">wp_kses_allowed_html( &#39;post&#39; );</code> <a href="https://codex.wordpress.org/Function_Reference/wp_kses_post">WordPress Documentation</a></p>
+
+<h6 id="twig">Twig:</h6>
+
+<p><code class="prettyprint">&lt;p class=&quot;intro&quot;&gt;{{post.post_content|e(&#39;wp_kses_post&#39;)}}&lt;/p&gt;</code></p>
+
+<p>In this example, <code class="prettyprint">post.post_content</code> is:</p>
+
+<p><code class="prettyprint">&lt;div foo=&quot;bar&quot; src=&quot;bum&quot;&gt;Foo&lt;/div&gt;&lt;script&gt;DoEvilThing();&lt;/script&gt;</code></p>
+
+<h6 id="output">Output:</h6>
+
+<p><code class="prettyprint">&lt;div&gt;Foo&lt;/div&gt;DoEvilThing();</code></p>
+
+<hr>
+
+<h3 id="esc_url">esc_url</h3>
+
+<p>Uses WordPress&rsquo; internal <code class="prettyprint">esc_url</code> function on text. This should be used to sanitize URLs. <a href="https://codex.wordpress.org/Function_Reference/esc_url">WordPress Documentation</a></p>
+
+<h6 id="twig">Twig:</h6>
+
+<p><code class="prettyprint">&lt;a href=&quot;{{ post.get_field(&#39;custom_link&#39;)|e(&#39;esc_url&#39;); }}&quot;&gt;&lt;/a&gt;</code></p>
+
+<h6 id="output">Output</h6>
+
+<p><code class="prettyprint">&lt;a href=&quot;http://google.com&quot;&gt;&lt;/a&gt;</code></p>
+
+<hr>
+
+<h3 id="esc_html">esc_html</h3>
+
+<p>Escaping for HTML blocks. It converts any potentially conflicting HTML entities to their encoded equivalent to prevent them from being rendered as markup by the browser, e.g. converts &ldquo;&lt;&rdquo; to &ldquo;&lt;&rdquo; and double quotes &ldquo; to &rdquo;$quot;&ldquo;</p>
+
+<p>This is for plain old text. If your content has HTML markup you should not use <code class="prettyprint">esc_html</code> which will render the HTML as it looks in your code editor &ndash; to preserve the HTML you will want to use <code class="prettyprint">wp_kses_post</code></p>
+
+<h6 id="twig">Twig:</h6>
+
+<p><code class="prettyprint">&lt;div class=&quot;equation&quot;&gt;{{ post.get_field(&#39;equation&#39;)|e(&#39;esc_html&#39;) }}&lt;/div&gt;</code></p>
+
+<h6 id="output">Output</h6>
+
+<p><code class="prettyprint">&lt;div class=&quot;equation&quot;&gt;is x &amp;lt; y?&lt;/div&gt;</code></p>
+
+<hr>
+
+<h3 id="esc_js">esc_js</h3>
+
+<p>Escapes text strings for echoing in JS. It is intended to be used for inline JS (in a tag attribute, for example onclick=”…”). Note that the strings have to be in single quotes. The filter ‘js_escape’ is also applied.</p>
+
+<h6 id="twig">Twig:</h6>
+
+<p><code class="prettyprint">&lt;script&gt;var bar = &#39;{{ post.get_field(&#39;name&#39;) }}&#39;;&lt;/script&gt;</code></p>
+
+<h6 id="output">Output</h6>
+
+<p><code class="prettyprint">&lt;script&gt;var bar = &#39;Gabrielle&#39;;&lt;/script&gt;</code></p>
 
           <h1 id="extending-objects">Extending Objects</h1>
 
@@ -2567,16 +2649,6 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 <td></td>
 </tr>
 <tr>
-<td><a href="#get_calling_script_dir">get_calling_script_dir</a></td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td><a href="#get_calling_script_file">get_calling_script_file</a></td>
-<td>string/null</td>
-<td></td>
-</tr>
-<tr>
 <td><a href="#get_context">get_context</a></td>
 <td>array</td>
 <td></td>
@@ -2794,52 +2866,6 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </tr>
 </tbody></table>
 
-<h2 id="get_calling_script_dir">get_calling_script_dir</h2>
-
-<p><code class="prettyprint">get_calling_script_dir( mixed $offset )</code></p>
-
-<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
-
-<p>Get calling script dir.</p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>$offset</td>
-<td>mixed</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h2 id="get_calling_script_file"><strike>get_calling_script_file</strike></h2>
-
-<p><strong>DEPRECATED</strong> since 0.20.0</p>
-
-<p><code class="prettyprint">get_calling_script_file( mixed $offset )</code></p>
-
-<p><strong>returns:</strong> <code class="prettyprint">string/null</code> </p>
-
-<p>Get calling script file.</p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>$offset</td>
-<td>mixed</td>
-<td></td>
-</tr>
-</tbody></table>
-
 <h2 id="get_context">get_context</h2>
 
 <p><code class="prettyprint">get_context( )</code></p>
@@ -2939,7 +2965,7 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 
 <h2 id="get_sidebar">get_sidebar</h2>
 
-<p><code class="prettyprint">get_sidebar( string $sidebar=&quot;&quot;, array $data=array() )</code></p>
+<p><code class="prettyprint">get_sidebar( string $sidebar=&quot;sidebar.php&quot;, array $data=array() )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">bool/string</code> </p>
 
@@ -4498,6 +4524,11 @@ Gets the public label for the menu item
 <td></td>
 </tr>
 <tr>
+<td><a href="#password_required">password_required</a></td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
 <td><a href="#path">path</a></td>
 <td>string</td>
 <td></td>
@@ -5197,6 +5228,14 @@ Gets the public label for the menu item
 <h6 id="twig">Twig</h6>
 <pre class="highlight twig"><code>    Parent page: <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">{{</span> <span class="nv">post.parent.link</span> <span class="cp">}}</span><span class="s">"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">post.parent.title</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;</span>
 </code></pre>
+
+<h2 id="password_required">password_required</h2>
+
+<p><code class="prettyprint">password_required( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">boolean</code> </p>
+
+<p>whether post requires password and correct password has been provided</p>
 
 <h2 id="path">path</h2>
 
@@ -6055,12 +6094,12 @@ Gets the public label for the menu item
 
           <h1 id="timber-user">Timber\User</h1>
 
-<p>This is used in Timber to represent users retrived from WordPress. You can call <code class="prettyprint">$my_user = new TimberUser(123);</code> directly, or access it through the <code class="prettyprint">{{ post.author }}</code> method.</p>
+<p>This is used in Timber to represent users retrived from WordPress. You can call <code class="prettyprint">$my_user = new Timber\User(123);</code> directly, or access it through the <code class="prettyprint">{{ post.author }}</code> method.</p>
 
 <h6 id="php">PHP</h6>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
-<span class="nv">$context</span><span class="p">[</span><span class="s1">'current_user'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimberUser</span><span class="p">();</span>
-<span class="nv">$context</span><span class="p">[</span><span class="s1">'post'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimberPost</span><span class="p">();</span>
+<span class="nv">$context</span><span class="p">[</span><span class="s1">'current_user'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Timber\User</span><span class="p">();</span>
+<span class="nv">$context</span><span class="p">[</span><span class="s1">'post'</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Timber\Post</span><span class="p">();</span>
 <span class="nx">Timber</span><span class="o">::</span><span class="na">render</span><span class="p">(</span><span class="s1">'single.twig'</span><span class="p">,</span> <span class="nv">$context</span><span class="p">);</span>
 </code></pre>
 
@@ -6331,7 +6370,7 @@ Gets the public label for the menu item
 
 <h2 id="error_log">error_log</h2>
 
-<p><code class="prettyprint">error_log( mixed $arg )</code></p>
+<p><code class="prettyprint">error_log( mixed $error )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
 
@@ -6343,9 +6382,9 @@ Gets the public label for the menu item
 </tr>
 </thead><tbody>
 <tr>
-<td>$arg</td>
+<td>$error</td>
 <td>mixed</td>
-<td>that you want to error_log</td>
+<td></td>
 </tr>
 </tbody></table>
 
@@ -6652,9 +6691,11 @@ Gets the public label for the menu item
 </tr>
 </tbody></table>
 
-<h2 id="paginate_links">paginate_links</h2>
+<h2 id="paginate_links"><strike>paginate_links</strike></h2>
 
-<p><code class="prettyprint">paginate_links( string $args=&quot;&quot; )</code></p>
+<p><strong>DEPRECATED</strong> since 1.1.2</p>
+
+<p><code class="prettyprint">paginate_links( array $args=array() )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">array</code> </p>
 
@@ -6667,7 +6708,7 @@ Gets the public label for the menu item
 </thead><tbody>
 <tr>
 <td>$args</td>
-<td>string</td>
+<td>array</td>
 <td></td>
 </tr>
 </tbody></table>
