@@ -135,4 +135,11 @@
 		}
 
 
+		function testTwigLoadsFromLocations(){
+			Timber::$locations = array(__DIR__.'/assets', __DIR__.'/custom_loader_dir');
+			$str = Timber::compile('thumb-test.twig');
+			$this->assertEquals('<img src="" />', trim($str));
+		}
+
+
 	}
