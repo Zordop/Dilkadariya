@@ -42,7 +42,7 @@
 			$str = Timber::compile('assets/single.twig', array());
 		}
 
-		function testTwigLoadsFromChildTheme(){
+		function testTwigLoadsFromChildTheme() {
 			$this->_setupParentTheme();
 			$this->_setupChildTheme();
 			$this->assertFileExists(WP_CONTENT_DIR.'/themes/fake-child-theme/style.css');
@@ -54,7 +54,7 @@
 			$this->assertEquals('I am single.twig', trim($str));
 		}
 
-		static function _setupChildTheme(){
+		static function _setupChildTheme() {
 			$dest_dir = WP_CONTENT_DIR.'/themes/fake-child-theme';
 			if (!file_exists($dest_dir)) {
     			mkdir($dest_dir, 0777, true);
@@ -66,7 +66,7 @@
 			copy(__DIR__.'/assets/single.twig', $dest_dir.'/views/single.twig');
 		}
 
-		static function _setupParentTheme(){
+		static function _setupParentTheme() {
 			$dest_dir = WP_CONTENT_DIR.'/themes/twentythirteen';
 			if (!file_exists($dest_dir.'/views')) {
     			mkdir($dest_dir.'/views', 0777, true);
@@ -75,7 +75,7 @@
 			copy(__DIR__.'/assets/single-parent.twig', $dest_dir.'/views/single-parent.twig');
 		}
 
-		function testTwigLoadsFromParentTheme(){
+		function testTwigLoadsFromParentTheme() {
 			$this->_setupParentTheme();
 			$this->_setupChildTheme();
 			switch_theme('fake-child-theme');
@@ -84,14 +84,14 @@
 			$this->assertEquals('I am single.twig in parent theme', trim($str));
 		}
 
-		function _setupRelativeViews(){
+		function _setupRelativeViews() {
 			if (!file_exists(__DIR__.'/views')) {
     			mkdir(__DIR__.'/views', 0777, true);
 			}
 			copy(__DIR__.'/assets/relative.twig', __DIR__.'/views/single.twig');
 		}
 
-		function _teardownRelativeViews(){
+		function _teardownRelativeViews() {
 			if (file_exists(__DIR__.'/views/single.twig')){
 				unlink(__DIR__.'/views/single.twig');
 			}
@@ -100,25 +100,25 @@
 			}
 		}
 
-		function testTwigLoadsFromRelativeToScript(){
+		function testTwigLoadsFromRelativeToScript() {
 			$this->_setupRelativeViews();
 			$str = Timber::compile('single.twig');
 			$this->assertEquals('I am in the assets directory', trim($str));
 			$this->_teardownRelativeViews();
 		}
 
-		function testTwigLoadsFromAbsolutePathOnServer(){
+		function testTwigLoadsFromAbsolutePathOnServer() {
 			$str = Timber::compile(__DIR__.'/assets/image-test.twig');
 			$this->assertEquals('<img src="" />', trim($str));
 		}
 
-		function _testTwigLoadsFromAbsolutePathOnServerWithSecurityRestriction(){
+		function _testTwigLoadsFromAbsolutePathOnServerWithSecurityRestriction() {
 			//ini_set('open_basedir', '/srv:/usr:/home/travis/:/tmp:/home:/home/travis/.phpenv/versions/*');
 			$str = Timber::compile('assets/single-foo.twig');
 			//ini_restore('open_basedir');
 		}
 
-		function testTwigLoadsFromAlternateDirName(){
+		function testTwigLoadsFromAlternateDirName() {
 			Timber::$dirname = array('foo', 'views');
 			if (!file_exists(get_template_directory().'/foo')) {
     			mkdir(get_template_directory().'/foo', 0777, true);
@@ -128,14 +128,15 @@
 			$this->assertEquals('I am single-foo', trim($str));
 		}
 
-		function testTwigLoadsFromLocation(){
+		function testTwigLoadsFromLocation() {
 			Timber::$locations = __DIR__.'/assets';
 			$str = Timber::compile('thumb-test.twig');
 			$this->assertEquals('<img src="" />', trim($str));
 		}
 
 
-		function testTwigLoadsFromLocations(){
+		function testTwigLoadsFromLocations() {
+			error_reporting(E_STRICT);
 			Timber::$locations = array(__DIR__.'/assets', __DIR__.'/custom_loader_dir');
 			$str = Timber::compile('thumb-test.twig');
 			$this->assertEquals('<img src="" />', trim($str));
