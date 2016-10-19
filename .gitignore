@@ -1,0 +1,6 @@
+wp-content
+cache/
+vendor
+timber-starter-theme
+timber.php
+composer.lock
