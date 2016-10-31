@@ -6984,11 +6984,11 @@ Gets the public label for the menu item
 
 <h6 id="php">PHP</h6>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
-    <span class="nv">$favorites</span> <span class="o">=</span> <span class="nx">Timber</span><span class="o">::</span><span class="na">transient</span><span class="p">(</span><span class="s1">'user-'</span><span class="o">.</span><span class="nv">$uid</span><span class="o">.</span><span class="s1">'-favorites'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$uid</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$context</span> <span class="o">=</span> <span class="nx">Timber</span><span class="o">::</span><span class="na">get_context</span><span class="p">();</span>
+    <span class="nv">$context</span><span class="p">[</span><span class="s1">'favorites'</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Timber\Helper</span><span class="o">::</span><span class="na">transient</span><span class="p">(</span><span class="s1">'user-'</span> <span class="o">.</span><span class="nv">$uid</span><span class="o">.</span> <span class="s1">'-favorites'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$uid</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">//some expensive query here that's doing something you want to store to a transient
 </span>        <span class="k">return</span> <span class="nv">$favorites</span><span class="p">;</span>
     <span class="p">},</span> <span class="mi">600</span><span class="p">);</span>
-    <span class="nx">Timber</span><span class="o">::</span><span class="na">context</span><span class="p">[</span><span class="s1">'favorites'</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$favorites</span><span class="p">;</span>
     <span class="nx">Timber</span><span class="o">::</span><span class="na">render</span><span class="p">(</span><span class="s1">'single.twig'</span><span class="p">,</span> <span class="nv">$context</span><span class="p">);</span>
 </code></pre>
 
