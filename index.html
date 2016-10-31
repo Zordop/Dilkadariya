@@ -5832,7 +5832,76 @@ Gets the public label for the menu item
 
 <p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
 
-          
+          <h1 id="timber-postquery">Timber\PostQuery</h1>
+
+<p>A PostQuery allows a user to query for a Collection of WordPress Posts. PostCollections are used directly in Twig templates to iterate through and retrieve meta information about the collection of posts</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<h2 id="__construct">__construct</h2>
+
+<p><code class="prettyprint">__construct( bool $query=false, string $post_class=&quot;\Timber\Post&quot; )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$query</td>
+<td>bool</td>
+<td></td>
+</tr>
+<tr>
+<td>$post_class</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="pagination">pagination</h2>
+
+<p><code class="prettyprint">pagination( array/ array $prefs=array() )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">Timber\Pagination</code> object</p>
+
+<p>Set pagination for the collection. Optionally could be used to get pagination with custom preferences.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$prefs</td>
+<td>array/ array</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get_query">get_query</h2>
+
+<p><code class="prettyprint">get_query( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">mixed</code> the query the user orignally passed to the pagination object</p>
+
+<p><em>This class extends \Timber\PostCollection</em></p>
+
+<p><em>This class implements \IteratorAggregate, \Traversable, \ArrayAccess, \Serializable, \Countable</em></p>
+
           <h1 id="timber-site">Timber\Site</h1>
 
 <p>TimberSite gives you access to information you need about your site. In Multisite setups, you can get info on other sites in your network.</p>
