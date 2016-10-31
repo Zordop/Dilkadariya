@@ -5637,6 +5637,202 @@ Gets the public label for the menu item
 
 <p><em>This class implements \Timber\CoreInterface</em></p>
 
+          <h1 id="timber-postpreview">Timber\PostPreview</h1>
+
+<p>An object that lets a user easily modify the post preview to their liking</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<h2 id="__construct">__construct</h2>
+
+<p><code class="prettyprint">__construct( \Timber\Post $post )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$post</td>
+<td>\Timber\Post</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="__tostring">__toString</h2>
+
+<p><code class="prettyprint">__toString( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<h2 id="chars">chars</h2>
+
+<p><code class="prettyprint">chars( bool/\Timber\integer $char_length=false )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$char_length</td>
+<td>bool/\Timber\integer</td>
+<td>(in characters) of the target preview</td>
+</tr>
+</tbody></table>
+
+<h2 id="end">end</h2>
+
+<p><code class="prettyprint">end( string $end=&quot;&amp;hellip;&quot; )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$end</td>
+<td>string</td>
+<td>how should the text in the preview end</td>
+</tr>
+</tbody></table>
+
+<h2 id="force">force</h2>
+
+<p><code class="prettyprint">force( bool/boolean $force=true )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$force</td>
+<td>bool/boolean</td>
+<td>If the editor wrote a manual excerpt longer than the set length, should it be &ldquo;forced&rdquo; to the size specified?</td>
+</tr>
+</tbody></table>
+
+<h2 id="length">length</h2>
+
+<p><code class="prettyprint">length( mixed/\Timber\integer $length=50 )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$length</td>
+<td>mixed/\Timber\integer</td>
+<td>(in words) of the target preview</td>
+</tr>
+</tbody></table>
+
+<h2 id="read_more">read_more</h2>
+
+<p><code class="prettyprint">read_more( string $readmore=&quot;Read More&quot; )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$readmore</td>
+<td>string</td>
+<td>What the text displays as to the reader inside of the <a> tag</td>
+</tr>
+</tbody></table>
+
+<h2 id="strip">strip</h2>
+
+<p><code class="prettyprint">strip( bool/boolean/string $strip=true )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$strip</td>
+<td>bool/boolean/string</td>
+<td>strip the tags or what? You can also provide a list of allowed tags</td>
+</tr>
+</tbody></table>
+
+<h2 id="assemble">assemble</h2>
+
+<p><code class="prettyprint">assemble( string $text, array/\Timber\booelan $readmore_matches, boolean $trimmed )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$text</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>$readmore_matches</td>
+<td>array/\Timber\booelan</td>
+<td></td>
+</tr>
+<tr>
+<td>$trimmed</td>
+<td>boolean</td>
+<td>was the text trimmed?</td>
+</tr>
+</tbody></table>
+
+<h2 id="run">run</h2>
+
+<p><code class="prettyprint">run( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+          
           <h1 id="timber-site">Timber\Site</h1>
 
 <p>TimberSite gives you access to information you need about your site. In Multisite setups, you can get info on other sites in your network.</p>
@@ -6436,6 +6632,7 @@ Gets the public label for the menu item
 
 <p><em>This class implements \Timber\CoreInterface</em></p>
 
+          
           <h1 id="timber-helper">Timber\Helper</h1>
 
 <p>As the name suggests these are helpers for Timber (and you!) when developing. You can find additional (mainly internally-focused helpers) in TimberURLHelper</p>
@@ -7091,6 +7288,983 @@ Gets the public label for the menu item
 </tr>
 <tr>
 <td>$enable_transients</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+          <h1 id="timber-imagehelper">Timber\ImageHelper</h1>
+
+<p>Implements the Twig image filters: https://github.com/timber/timber/wiki/Image-cookbook#arbitrary-resizing-of-images - resize - retina - letterbox - tojpg Implementation: - public static functions provide the methods that are called by the filter - most of the work is common to all filters (URL analysis, directory gymnastics, file caching, error management) and done by private static functions - the specific part (actual image processing) is delegated to dedicated subclasses of TimberImageOperation</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#resize">resize</a></td>
+<td>string</td>
+<td>(ex: )</td>
+</tr>
+</tbody></table>
+
+<h2 id="delete_generatedif_image"><em>delete_generated</em>if_image</h2>
+
+<p><code class="prettyprint">_delete_generated_if_image( mixed $post_id )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<p>Checks if attachment is an image before deleting generated files</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$post_id</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="add_filters">add_filters</h2>
+
+<p><code class="prettyprint">add_filters( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<p>adds a &lsquo;relative&rsquo; key to wp_upload_dir() result. It will contain the relative url to upload dir.</p>
+
+<h2 id="delete_generated_files">delete_generated_files</h2>
+
+<p><code class="prettyprint">delete_generated_files( mixed $local_file )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<p>Deletes the auto-generated files for resize and letterboxing created by Timber or: http://example.org/wp-content/uploads/2015/my-pic.jpg</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$local_file</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get_letterbox_file_path">get_letterbox_file_path</h2>
+
+<p><code class="prettyprint">get_letterbox_file_path( mixed $url, mixed $w, mixed $h, mixed $color )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">mixed</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$w</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$h</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$color</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get_letterbox_file_url">get_letterbox_file_url</h2>
+
+<p><code class="prettyprint">get_letterbox_file_url( mixed $url, mixed $w, mixed $h, mixed $color )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">mixed</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$w</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$h</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$color</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get_resize_file_path">get_resize_file_path</h2>
+
+<p><code class="prettyprint">get_resize_file_path( mixed $url, mixed $w, mixed $h, mixed $crop )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">mixed</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$w</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$h</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$crop</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get_resize_file_url">get_resize_file_url</h2>
+
+<p><code class="prettyprint">get_resize_file_url( mixed $url, mixed $w, mixed $h, mixed $crop )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">mixed</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$w</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$h</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$crop</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get_server_location">get_server_location</h2>
+
+<p><code class="prettyprint">get_server_location( mixed $url )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<p>Determines the filepath corresponding to a given URL</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get_sideloaded_file_loc">get_sideloaded_file_loc</h2>
+
+<p><code class="prettyprint">get_sideloaded_file_loc( mixed $file )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<p>Determines the filepath where a given external file will be stored.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$file</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="img_to_jpg">img_to_jpg</h2>
+
+<p><code class="prettyprint">img_to_jpg( mixed $src, string $bghex=&quot;#FFFFFF&quot;, bool $force=false )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<p>Generates a new image by converting the source GIF or PNG into JPG</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$src</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$bghex</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>$force</td>
+<td>bool</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="init">init</h2>
+
+<p><code class="prettyprint">init( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<h2 id="is_animated_gif">is_animated_gif</h2>
+
+<p><code class="prettyprint">is_animated_gif( mixed $file )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">boolean</code> true if it&rsquo;s an animated gif, false if not</p>
+
+<p>checks to see if the given file is an aimated gif</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$file</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="letterbox">letterbox</h2>
+
+<p><code class="prettyprint">letterbox( mixed $src, mixed $w, mixed $h, string $color=&quot;#000000&quot;, bool $force=false )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<p>Generate a new image with the specified dimensions. New dimensions are achieved by adding colored bands to maintain ratio.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$src</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$w</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$h</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$color</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>$force</td>
+<td>bool</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="resize">resize</h2>
+
+<p><code class="prettyprint">resize( mixed $src, mixed $w, mixed $h, string $crop=&quot;default&quot;, bool $force=false )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> (ex: )</p>
+
+<p>Generates a new image with the specified dimensions. New dimensions are achieved by cropping to maintain ratio.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$src</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$w</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$h</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$crop</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>$force</td>
+<td>bool</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h6 id="twig">Twig</h6>
+<pre class="highlight twig"><code>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"</span><span class="cp">{{</span> <span class="nv">image.src</span> <span class="err">|</span> <span class="nv">resize</span><span class="p">(</span><span class="nv">300</span><span class="p">,</span> <span class="nv">200</span><span class="p">,</span> <span class="s1">'top'</span><span class="p">)</span> <span class="cp">}}</span><span class="s">"</span> <span class="nt">/&gt;</span>
+</code></pre>
+
+<h6 id="html">HTML</h6>
+<pre class="highlight html"><code>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"http://example.org/wp-content/uploads/pic-300x200-c-top.jpg"</span> <span class="nt">/&gt;</span>
+</code></pre>
+
+<h2 id="retina_resize">retina_resize</h2>
+
+<p><code class="prettyprint">retina_resize( mixed $src, mixed $multiplier=2, bool/boolean $force=false )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> url to the new image</p>
+
+<p>Generates a new image with increased size, for display on Retina screens.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$src</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$multiplier</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$force</td>
+<td>bool/boolean</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="sideload_image">sideload_image</h2>
+
+<p><code class="prettyprint">sideload_image( mixed $file )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> the URL to the downloaded file</p>
+
+<p>downloads an external image to the server and stores it on the server</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$file</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="add_actions">add_actions</h2>
+
+<p><code class="prettyprint">add_actions( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<p>Deletes all resized versions of an image when the source is deleted or its meta data is regenerated</p>
+
+<h2 id="add_constants">add_constants</h2>
+
+<p><code class="prettyprint">add_constants( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<p>Adds a constant defining the path to the content directory relative to the site for example /wp-content or /content</p>
+
+<h2 id="process_delete_generated_files">process_delete_generated_files</h2>
+
+<p><code class="prettyprint">process_delete_generated_files( mixed $filename, mixed $ext, mixed $dir, mixed $search_pattern, mixed $match_pattern=null )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<p>Deletes resized versions of the supplied file name. So if passed a value like my-pic.jpg, this function will delete my-pic-500x200-c-left.jpg, my-pic-400x400-c-default.jpg, etc. keeping these here so I know what the hell we&rsquo;re matching $match = preg_match(&ldquo;/\/srv\/www\/wordpress-develop\/src\/wp-content\/uploads\/2014\/05\/$filename-[0-9]<em>x[0-9]</em>-c-[a-z]<em>.jpg/&rdquo;, $found_file); $match = preg_match(&ldquo;/\/srv\/www\/wordpress-develop\/src\/wp-content\/uploads\/2014\/05\/arch-[0-9]</em>x[0-9]<em>-c-[a-z]</em>.jpg/&rdquo;, $filename);</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$filename</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$ext</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$dir</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$search_pattern</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$match_pattern</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+          <h1 id="timber-texthelper">Timber\TextHelper</h1>
+
+<p>Class provides different text-related functions commonly used in WordPress development</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<h2 id="close_tags">close_tags</h2>
+
+<p><code class="prettyprint">close_tags( mixed $html )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$html</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="trim_characters">trim_characters</h2>
+
+<p><code class="prettyprint">trim_characters( mixed $text, mixed $num_chars=60, mixed $more=null )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> trimmed text.</p>
+
+<p>Trims text to a certain number of characters. This function can be useful for excerpt of the post As opposed to wp_trim_words trims characters that makes text to take the same amount of space in each post for example</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$text</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$num_chars</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$more</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="trim_words">trim_words</h2>
+
+<p><code class="prettyprint">trim_words( mixed $text, mixed $num_words=55, mixed $more=null, string $allowed_tags=&quot;p a span b i br blockquote&quot; )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$text</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$num_words</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$more</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$allowed_tags</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+
+          <h1 id="timber-urlhelper">Timber\URLHelper</h1>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<h2 id="file_system_to_url">file_system_to_url</h2>
+
+<p><code class="prettyprint">file_system_to_url( string $fs )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$fs</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get_current_url">get_current_url</h2>
+
+<p><code class="prettyprint">get_current_url( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<h2 id="get_full_path">get_full_path</h2>
+
+<p><code class="prettyprint">get_full_path( mixed $src )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$src</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get_host">get_host</h2>
+
+<p><code class="prettyprint">get_host( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> the HTTP_HOST or SERVER_NAME</p>
+
+<p>Some setups like HTTP_HOST, some like SERVER_NAME, it&rsquo;s complicated</p>
+
+<h2 id="get_params">get_params</h2>
+
+<p><code class="prettyprint">get_params( bool/int $i=false )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">array/string</code> </p>
+
+<p>Returns the url parameters, for example for url http://example.org/blog/post/news/2014/whatever this will return array(&lsquo;blog&rsquo;, &#39;post&rsquo;, &#39;news&rsquo;, &#39;2014&rsquo;, &#39;whatever&rsquo;); OR if sent an integer like: TimberUrlHelper::get_params(2); this will return &#39;news&rsquo;;</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$i</td>
+<td>bool/int</td>
+<td>the position of the parameter to grab.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get_path_base">get_path_base</h2>
+
+<p><code class="prettyprint">get_path_base( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<h2 id="get_rel_path">get_rel_path</h2>
+
+<p><code class="prettyprint">get_rel_path( mixed $src )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$src</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get_rel_url">get_rel_url</h2>
+
+<p><code class="prettyprint">get_rel_url( mixed $url, bool $force=false )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$force</td>
+<td>bool</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get_scheme">get_scheme</h2>
+
+<p><code class="prettyprint">get_scheme( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<p>Get url scheme</p>
+
+<h2 id="is_absolute">is_absolute</h2>
+
+<p><code class="prettyprint">is_absolute( string $path )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">boolean</code> true if $path is an absolute url, false if relative.</p>
+
+<p>This will evaluate wheter a URL is at an aboslute location (like http://example.org/whatever)</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$path</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="is_external">is_external</h2>
+
+<p><code class="prettyprint">is_external( mixed $url )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">bool</code>     true if $path is an external url, false if relative or local. true if it&rsquo;s a subdomain (http://cdn.example.org = true)</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="is_external_content">is_external_content</h2>
+
+<p><code class="prettyprint">is_external_content( mixed $url )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">boolean</code> if $url points to an external location returns true</p>
+
+<p>This function is slightly different from the one below in the case of: an image hosted on the same domain BUT on a different site than the Wordpress install will be reported as external content.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="is_local">is_local</h2>
+
+<p><code class="prettyprint">is_local( mixed $url )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">bool</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="is_url">is_url</h2>
+
+<p><code class="prettyprint">is_url( mixed $url )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">bool</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="prepend_to_url">prepend_to_url</h2>
+
+<p><code class="prettyprint">prepend_to_url( mixed $url, mixed $path )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$path</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="preslashit">preslashit</h2>
+
+<p><code class="prettyprint">preslashit( mixed $path )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$path</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="remove_double_slashes">remove_double_slashes</h2>
+
+<p><code class="prettyprint">remove_double_slashes( mixed $url )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="remove_trailing_slash">remove_trailing_slash</h2>
+
+<p><code class="prettyprint">remove_trailing_slash( mixed $link )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<p>Pass links through untrailingslashit unless they are a single /</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$link</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="url_to_file_system">url_to_file_system</h2>
+
+<p><code class="prettyprint">url_to_file_system( mixed $url )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<p>Takes a url and figures out its place based in the file system based on path NOTE: Not fool-proof, makes a lot of assumptions about the file path matching the URL path</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
 <td>mixed</td>
 <td></td>
 </tr>
