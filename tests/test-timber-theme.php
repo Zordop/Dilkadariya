@@ -2,6 +2,26 @@
 
 	class TestTimberTheme extends Timber_UnitTestCase {
 
+		function setUp() {
+			self::setTheme();
+		}
+
+		public static function setTheme() {
+			$link = ABSPATH.'wp-content/themes/default-theme';
+			if ( !file_exists($link) ) {
+				symlink(get_stylesheet_directory_uri(), $link);
+			}
+			switch_theme('default-theme');
+		}
+
+		public static function setAlternateTheme() {
+			$link = ABSPATH.'themes/default-theme';
+			if ( !file_exists($link) ) {
+				symlink(get_stylesheet_directory_uri(), $link);
+			}
+			switch_theme('default-theme');
+		}
+
 		function testThemeMods(){
 			set_theme_mod('foo', 'bar');
 			$theme = new TimberTheme();

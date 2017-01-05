@@ -116,7 +116,7 @@ class TestTimberImageResize extends Timber_UnitTestCase {
 	function testWPMLurlRemote() {
 		// this test replicates the url issue caused by the WPML language identifier in the url
 		// However, WPML can't be installed with composer so this test mocks the WPML plugin
-
+		TestTimberTheme::setTheme();
 		// WPML uses a filter to alter the home_url
 		$home_url_filter = function( $url ) { return $url.'/en'; };
 		add_filter( 'home_url', $home_url_filter, -10, 4 );
