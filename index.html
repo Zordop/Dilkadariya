@@ -3734,6 +3734,12 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
     <span class="nt">&lt;/article&gt;</span>
 </code></pre>
 
+<h2 id="depth">depth</h2>
+
+<p><code class="prettyprint">depth( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
 <h2 id="is_child">is_child</h2>
 
 <p><code class="prettyprint">is_child( )</code></p>
@@ -3817,6 +3823,26 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
       <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"comment"</span><span class="nt">&gt;</span>Happy Birthday!<span class="nt">&lt;/p&gt;</span>
     <span class="nt">&lt;/article&gt;</span>
 </code></pre>
+
+<h2 id="update_depth">update_depth</h2>
+
+<p><code class="prettyprint">update_depth( int $depth )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$depth</td>
+<td>int</td>
+<td></td>
+</tr>
+</tbody></table>
 
 <p><em>This class extends \Timber\Core</em></p>
 
@@ -4109,8 +4135,8 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </tbody></table>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight twig"><code>    <span class="nt">&lt;h1&gt;</span><span class="cp">{{</span><span class="nv">post.title</span><span class="cp">}}</span><span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"</span><span class="cp">{{</span><span class="nv">post.thumbnail.src</span><span class="cp">}}</span><span class="s">"</span> <span class="nt">/&gt;</span>
+<pre class="highlight twig"><code>    <span class="nt">&lt;h1&gt;</span><span class="cp">{{</span> <span class="nv">post.title</span> <span class="cp">}}</span><span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"</span><span class="cp">{{</span> <span class="nv">post.thumbnail.src</span> <span class="cp">}}</span><span class="s">"</span> <span class="nt">/&gt;</span>
 </code></pre>
 
 <h6 id="html">HTML</h6>
@@ -4511,16 +4537,30 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
         <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
     <span class="nt">&lt;/ul&gt;</span>
 
-## title
-`title( )`
+## thumbnail
+`thumbnail( )`
 
-**returns:** `string` the public label like Foo
+**returns:** `string` the public thumbnail url
 
-Gets the public label for the menu item
+Gets the post thumbnail image object
 
 ###### Twig
 ```twig
     <span class="cp">{%</span> <span class="k">for</span> <span class="nv">item</span> <span class="ow">in</span> <span class="nv">menu.items</span> <span class="cp">%}</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">{{</span> <span class="nv">item.link</span> <span class="cp">}}</span><span class="s">"</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">"</span><span class="cp">{{</span> <span class="nv">item.thumbnail</span> <span class="cp">}}</span><span class="s">"</span><span class="nt">/&gt;&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</code></pre>
+
+<h2 id="title">title</h2>
+
+<p><code class="prettyprint">title( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> the public label like Foo</p>
+
+<p>Gets the public label for the menu item</p>
+
+<h6 id="twig">Twig</h6>
+<pre class="highlight twig"><code>    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">item</span> <span class="ow">in</span> <span class="nv">menu.items</span> <span class="cp">%}</span>
         <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">{{</span> <span class="nv">item.link</span> <span class="cp">}}</span><span class="s">"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">item.title</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
     <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 </code></pre>
@@ -4836,7 +4876,7 @@ Gets the public label for the menu item
 
 <h2 id="comments">comments</h2>
 
-<p><code class="prettyprint">comments( int $count, string $order=&quot;wp&quot;, string $type=&quot;comment&quot;, string $status=&quot;approve&quot;, string $CommentClass=&quot;Timber\Comment&quot; )</code></p>
+<p><code class="prettyprint">comments( mixed/int $count=null, string $order=&quot;wp&quot;, string $type=&quot;comment&quot;, string $status=&quot;approve&quot;, string $CommentClass=&quot;Timber\Comment&quot; )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">bool/array</code> </p>
 
@@ -4851,7 +4891,7 @@ Gets the public label for the menu item
 </thead><tbody>
 <tr>
 <td>$count</td>
-<td>int</td>
+<td>mixed/int</td>
 <td>Set the number of comments you want to get. <code class="prettyprint">0</code> is analogous to &ldquo;all&rdquo;</td>
 </tr>
 <tr>
@@ -6047,6 +6087,12 @@ Gets the public label for the menu item
 </tr>
 </tbody></table>
 
+<h2 id="icon">icon</h2>
+
+<p><code class="prettyprint">icon( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
 <h2 id="link">link</h2>
 
 <p><code class="prettyprint">link( )</code></p>
@@ -6075,11 +6121,31 @@ Gets the public label for the menu item
 
 <p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
 
+<h2 id="icon_multisite">icon_multisite</h2>
+
+<p><code class="prettyprint">icon_multisite( mixed $site_id )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$site_id</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
 <h2 id="switch_to_blog">switch_to_blog</h2>
 
 <p><code class="prettyprint">switch_to_blog( string/\Timber\integer/null $site_name_or_id )</code></p>
 
-<p><strong>returns:</strong> <code class="prettyprint">array</code> with the ID of the old and new blogs</p>
+<p><strong>returns:</strong> <code class="prettyprint">integer</code> with the ID of the new blog</p>
 
 <p>Switches to the blog requested in the request</p>
 
@@ -6595,7 +6661,7 @@ Gets the public label for the menu item
 
 <h2 id="__construct">__construct</h2>
 
-<p><code class="prettyprint">__construct( bool/int/bool $uid=false )</code></p>
+<p><code class="prettyprint">__construct( bool/object/int/bool $uid=false )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
 
@@ -6608,7 +6674,7 @@ Gets the public label for the menu item
 </thead><tbody>
 <tr>
 <td>$uid</td>
-<td>bool/int/bool</td>
+<td>bool/object/int/bool</td>
 <td></td>
 </tr>
 </tbody></table>
@@ -7410,6 +7476,28 @@ Gets the public label for the menu item
 
 <p>adds a &lsquo;relative&rsquo; key to wp_upload_dir() result. It will contain the relative url to upload dir.</p>
 
+<h2 id="analyze_url">analyze_url</h2>
+
+<p><code class="prettyprint">analyze_url( mixed $url )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">array</code>       an array (see keys in code below)</p>
+
+<p>Takes in an URL and breaks it into components, that will then be used in the different steps of image processing. The image is expected to be either part of a theme, plugin, or an upload.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$url</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
 <h2 id="delete_generated_files">delete_generated_files</h2>
 
 <p><code class="prettyprint">delete_generated_files( mixed $local_file )</code></p>
@@ -7822,6 +7910,28 @@ Gets the public label for the menu item
 </tr>
 </tbody></table>
 
+<h2 id="theme_url_to_dir">theme_url_to_dir</h2>
+
+<p><code class="prettyprint">theme_url_to_dir( mixed $src )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> full path to the file in question</p>
+
+<p>Converts a URL located in a theme directory into the raw file path</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$src</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
 <h2 id="add_actions">add_actions</h2>
 
 <p><code class="prettyprint">add_actions( )</code></p>
@@ -7837,6 +7947,48 @@ Gets the public label for the menu item
 <p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
 
 <p>Adds a constant defining the path to the content directory relative to the site for example /wp-content or /content</p>
+
+<h2 id="is_in_theme_dir">is_in_theme_dir</h2>
+
+<p><code class="prettyprint">is_in_theme_dir( mixed $path )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">bool</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$path</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="maybe_realpath">maybe_realpath</h2>
+
+<p><code class="prettyprint">maybe_realpath( mixed $path )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code>           the resolved path</p>
+
+<p>Runs realpath to resolve symbolic links (../, etc). But only if it&rsquo;s a path and not a URL</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$path</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
 
 <h2 id="process_delete_generated_files">process_delete_generated_files</h2>
 
@@ -8317,6 +8469,26 @@ Gets the public label for the menu item
 </tr>
 </tbody></table>
 
+<h2 id="unpreslashit">unpreslashit</h2>
+
+<p><code class="prettyprint">unpreslashit( mixed $path )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$path</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
 <h2 id="url_to_file_system">url_to_file_system</h2>
 
 <p><code class="prettyprint">url_to_file_system( mixed $url )</code></p>
@@ -8335,6 +8507,28 @@ Gets the public label for the menu item
 <tr>
 <td>$url</td>
 <td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="user_trailingslashit">user_trailingslashit</h2>
+
+<p><code class="prettyprint">user_trailingslashit( string $link )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<p>Pass links through user_trailingslashit handling query strings properly</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$link</td>
+<td>string</td>
 <td></td>
 </tr>
 </tbody></table>
