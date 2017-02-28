@@ -6528,7 +6528,7 @@ $post_class | string |
     <span class="o">&lt;?</span><span class="nx">php</span>
         <span class="nv">$theme</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TimberTheme</span><span class="p">(</span><span class="s2">"my-theme"</span><span class="p">);</span>
         <span class="nv">$context</span><span class="p">[</span><span class="s1">'theme_stuff'</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$theme</span><span class="p">;</span>
-        <span class="nx">Timber</span><span class="o">::</span><span class="na">render</span><span class="p">(</span><span class="s1">'single.'</span><span class="p">)</span>
+        <span class="nx">Timber</span><span class="o">::</span><span class="na">render</span><span class="p">(</span><span class="s1">'single.twig'</span><span class="p">,</span> <span class="nv">$context</span><span class="p">);</span>
     <span class="cp">?&gt;</span>
 </code></pre>
 
