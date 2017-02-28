@@ -4116,7 +4116,7 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 
 <h2 id="src">src</h2>
 
-<p><code class="prettyprint">src( string $size=&quot;&quot; )</code></p>
+<p><code class="prettyprint">src( string $size=&quot;full&quot; )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">bool/string</code> </p>
 
@@ -6341,6 +6341,12 @@ Gets the post thumbnail image object
 
 <p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
 
+<p>Returns a full link to the term archive page like <code class="prettyprint">http://example.com/category/news</code></p>
+
+<h6 id="twig">Twig</h6>
+<pre class="highlight twig"><code>    See all posts in: <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">{{</span> <span class="nv">term.link</span> <span class="cp">}}</span><span class="s">"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">term.name</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;</span>
+</code></pre>
+
 <h2 id="meta">meta</h2>
 
 <p><code class="prettyprint">meta( string $field_name )</code></p>
@@ -6361,44 +6367,39 @@ Gets the post thumbnail image object
 </tr>
 </tbody></table>
 
+<h6 id="twig">Twig</h6>
+<pre class="highlight twig"><code>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"location-info"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h2&gt;</span><span class="cp">{{</span> <span class="nv">term.name</span> <span class="cp">}}</span><span class="nt">&lt;/h2&gt;</span>
+      <span class="nt">&lt;p&gt;</span><span class="cp">{{</span> <span class="nv">term.meta</span><span class="p">(</span><span class="s1">'address'</span><span class="p">)</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+</code></pre>
+
 <h2 id="path">path</h2>
 
 <p><code class="prettyprint">path( )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
 
-<h2 id="posts">posts</h2>
-
-<p><code class="prettyprint">posts( mixed/int $numberposts_or_args=10, string $post_type_or_class=&quot;any&quot;, string $post_class=&quot;&quot; )</code></p>
-
-<p><strong>returns:</strong> <code class="prettyprint">array/bool/null</code> </p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>$numberposts_or_args</td>
-<td>mixed/int</td>
-<td></td>
-</tr>
-<tr>
-<td>$post_type_or_class</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td>$post_class</td>
-<td>string</td>
-<td></td>
-</tr>
-</tbody></table>
+<p>Returns a relative link (path) to the term archive page like <code class="prettyprint">/category/news</code></p>
 
 <h6 id="twig">Twig</h6>
-<pre class="highlight twig"><code>    <span class="nt">&lt;h4&gt;</span>Recent posts in <span class="cp">{{</span><span class="nv">term.name</span><span class="cp">}}</span><span class="nt">&lt;/h4&gt;</span>
+<pre class="highlight twig"><code>    See all posts in: <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">{{</span> <span class="nv">term.path</span> <span class="cp">}}</span><span class="s">"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">term.name</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;</span>
+    `
+
+## posts
+`posts( mixed/int $numberposts_or_args=10, string $post_type_or_class="any", string $post_class="" )`
+
+**returns:** `array/bool/null` 
+
+Name | Type | Description
+---- | ---- | -----------
+$numberposts_or_args | mixed/int | 
+$post_type_or_class | string | 
+$post_class | string | 
+
+###### Twig
+```twig
+    <span class="nt">&lt;h4&gt;</span>Recent posts in <span class="cp">{{</span> <span class="nv">term.name</span> <span class="cp">}}</span><span class="nt">&lt;/h4&gt;</span>
     <span class="nt">&lt;ul&gt;</span>
     <span class="cp">{%</span> <span class="k">for</span> <span class="nv">post</span> <span class="ow">in</span> <span class="nv">term.posts</span><span class="p">(</span><span class="nv">3</span><span class="p">,</span> <span class="s1">'post'</span><span class="p">)</span> <span class="cp">%}</span>
         <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">{{</span><span class="nv">post.link</span><span class="cp">}}</span><span class="s">"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">post.title</span><span class="cp">}}</span><span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
