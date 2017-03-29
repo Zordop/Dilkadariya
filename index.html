@@ -1154,8 +1154,8 @@ Timber::render('single.twig', $context);
 
 <h5 id="timber-does-bylines-like-a-boss">Timber does bylines like a boss:</h5>
 <pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"byline"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"name"</span><span class="nt">&gt;</span>By <span class="cp">{{</span><span class="nv">post.author.name</span><span class="cp">}}</span><span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"date"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">post.post_date</span><span class="o">|</span><span class="nf">date</span><span class="p">(</span><span class="s1">'F j, Y'</span><span class="p">)</span><span class="cp">}}</span><span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"name"</span><span class="nt">&gt;</span>By <span class="cp">{{</span> <span class="nv">post.author.name</span> <span class="cp">}}</span><span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"date"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">post.post_date</span><span class="o">|</span><span class="nf">date</span><span class="p">(</span><span class="s1">'F j, Y'</span><span class="p">)</span> <span class="cp">}}</span><span class="nt">&lt;/span&gt;</span>
 <span class="nt">&lt;/p&gt;</span>
 </code></pre>
 
@@ -1165,7 +1165,7 @@ Timber::render('single.twig', $context);
 
 <h5 id="nothing-is-worse-than-an-out-of-date-copyright-year-in-the-footer-nothing">Nothing is worse than an out-of-date copyright year in the footer. Nothing.</h5>
 <pre class="highlight twig"><code><span class="nt">&lt;footer&gt;</span>
-    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"copyright"</span><span class="nt">&gt;</span><span class="ni">&amp;copy;</span> <span class="cp">{{</span><span class="nv">now</span><span class="o">|</span><span class="nf">date</span><span class="p">(</span><span class="s1">'Y'</span><span class="p">)</span><span class="cp">}}</span> by <span class="cp">{{</span><span class="nv">bloginfo</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span><span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"copyright"</span><span class="nt">&gt;</span><span class="ni">&amp;copy;</span> <span class="cp">{{</span> <span class="nv">now</span><span class="o">|</span><span class="nf">date</span><span class="p">(</span><span class="s1">'Y'</span><span class="p">)</span> <span class="cp">}}</span> by <span class="cp">{{</span> <span class="nv">bloginfo</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
 <span class="nt">&lt;/footer&gt;</span>
 </code></pre>
 
@@ -1178,19 +1178,19 @@ Timber::render('single.twig', $context);
 <h4 id="standard-transforms">Standard transforms</h4>
 
 <h5 id="automatically-link-urls-email-addresses-twitter-s-and-s">Automatically link URLs, email addresses, twitter @s and #s</h5>
-<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"tweet"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">post.content</span><span class="o">|</span><span class="nf">twitterify</span><span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"tweet"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">post.content</span><span class="o">|</span><span class="nf">twitterify</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
 </code></pre>
 
 <h5 id="run-wordpress-39-auto-paragraph-filter">Run WordPress&rsquo; auto-paragraph filter</h5>
-<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">post.my_custom_text</span><span class="o">|</span><span class="nf">wpautop</span><span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">post.my_custom_text</span><span class="o">|</span><span class="nf">wpautop</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
 </code></pre>
 
 <h5 id="run-wordpress-shortcodes-over-a-block-of-text">Run WordPress shortcodes over a block of text</h5>
-<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">post.my_custom_text</span><span class="o">|</span><span class="nf">shortcodes</span><span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">post.my_custom_text</span><span class="o">|</span><span class="nf">shortcodes</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
 </code></pre>
 
 <h5 id="code-samples-lord-knows-i-39-ve-got-39-em">Code samples? Lord knows I&rsquo;ve got &lsquo;em:</h5>
-<pre class="highlight twig"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"code-sample"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">post.code_samples</span><span class="o">|</span><span class="nf">pretags</span><span class="cp">}}</span><span class="nt">&lt;/div&gt;</span>
+<pre class="highlight twig"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"code-sample"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">post.code_samples</span><span class="o">|</span><span class="nf">pretags</span> <span class="cp">}}</span><span class="nt">&lt;/div&gt;</span>
 </code></pre>
 
 <h5 id="functions-inside-of-your-templates-plugin-calls">Functions inside of your templates, plugin calls:</h5>
@@ -1200,54 +1200,71 @@ Timber::render('single.twig', $context);
 </code></pre>
 
 <p>Timber-fied template:</p>
-<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">function</span><span class="p">(</span><span class="s1">'twentytwelve_entry_meta'</span><span class="p">)</span><span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">function</span><span class="p">(</span><span class="s1">'twentytwelve_entry_meta'</span><span class="p">)</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
 </code></pre>
 
 <h5 id="functions-quot-with-params-quot-inside-of-your-templates-plugin-calls">Functions &ldquo;with params&rdquo; inside of your templates, plugin calls:</h5>
 
 <p>Old template:</p>
-<pre class="highlight html"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">&lt;?php get_the_title($post-&gt;ID); ?&gt;</span><span class="nt">&lt;/p&gt;</span>
+<pre class="highlight html"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">&lt;?php get_the_title( $post-&gt;ID ); ?&gt;</span><span class="nt">&lt;/p&gt;</span>
 </code></pre>
 
 <p>Timber-fied template:</p>
-<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">function</span><span class="p">(</span><span class="s1">'get_the_title'</span><span class="p">,</span> <span class="nv">post.ID</span><span class="p">)</span><span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">function</span><span class="p">(</span><span class="s1">'get_the_title'</span><span class="p">,</span> <span class="nv">post.ID</span><span class="p">)</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
 </code></pre>
 
 <hr>
 
 <h3 id="internationalization">Internationalization</h3>
 
-<h4 id="__">__()</h4>
+<h4 id="translation-functions">Translation functions</h4>
 
-<p>Timber comes built-in with your ordinary gettext function __() for l10n.</p>
+<p>Timber supports the gettext i18n functions used in WordPress:</p>
+
+<ul>
+<li>__()</li>
+<li>_x()</li>
+<li>_n()</li>
+<li>_nx()</li>
+<li>_n_noop()</li>
+<li>_nx_noop()</li>
+<li>translate()</li>
+<li>translate_nooped_plural()</li>
+</ul>
+
+<p>While <code class="prettyprint">_e()</code> and <code class="prettyprint">_ex()</code> are also supported, you probably won’t need them in Twig, because <code class="prettyprint">{{ }}</code> already echoes the output.</p>
 
 <p>Old template:</p>
-<pre class="highlight html"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">&lt;?php _e('Posted on', 'my-text-domain') ?&gt;</span> [...]<span class="nt">&lt;/p&gt;</span>
+<pre class="highlight html"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">&lt;?php _e( 'Posted on', 'my-text-domain' ) ?&gt;</span> [...]<span class="nt">&lt;/p&gt;</span>
 </code></pre>
 
 <p>Timber-fied template:</p>
-<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">__</span><span class="p">(</span><span class="s1">'Posted on'</span><span class="p">,</span> <span class="s1">'my-text-domain'</span><span class="p">)</span><span class="cp">}}</span> [...]<span class="nt">&lt;/p&gt;</span>
+<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">__</span><span class="p">(</span><span class="s1">'Posted on'</span><span class="p">,</span> <span class="s1">'my-text-domain'</span><span class="p">)</span> <span class="cp">}}</span> [...]<span class="nt">&lt;/p&gt;</span>
 </code></pre>
 
 <h4 id="sprintf-notation">sprintf notation</h4>
 
-<p>You can even use sprintf-type placeholders, using the <code class="prettyprint">format</code> filter:</p>
+<p>You can use sprintf-type placeholders, using the <code class="prettyprint">format</code> filter:</p>
 
 <p>Old template:</p>
 <pre class="highlight html"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">&lt;?php printf( __('Posted on %s', 'my-text-domain'), $posted_on_date ) ?&gt;</span><span class="nt">&lt;/p&gt;</span>
 </code></pre>
 
 <p>Timber-fied template:</p>
-<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">{{</span><span class="nv">__</span><span class="p">(</span><span class="s1">'Posted on %s'</span><span class="p">,</span> <span class="s1">'my-text-domain'</span><span class="p">)</span><span class="o">|</span><span class="nf">format</span><span class="p">(</span><span class="nv">posted_on_date</span><span class="p">)</span><span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+<pre class="highlight twig"><code><span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"entry-meta"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">__</span><span class="p">(</span><span class="s1">'Posted on %s'</span><span class="p">,</span> <span class="s1">'my-text-domain'</span><span class="p">)</span><span class="o">|</span><span class="nf">format</span><span class="p">(</span><span class="nv">posted_on_date</span><span class="p">)</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
 </code></pre>
 
-<h4 id="generating-po-files-using-poedit">Generating .po files using Poedit</h4>
+<h4 id="generating-po-files-with-poedit-2">Generating .po files with Poedit 2</h4>
 
-<p>Unfortunately, Twig files with the above functions are not automatically parsed by gettext in Poedit. The quick and dirty workaround is to start each .twig file with <code class="prettyprint">{#&lt;?php#}</code> (by doing this, gettext will interpret whatever comes next as php, and start looking for <code class="prettyprint">__</code>).</p>
+<p><a href="https://poedit.net/">Poedit 2</a> fully supports parsing of Twig files (Pro version only) with the following functions: __(), _x(), _n(), _nx().</p>
+
+<h4 id="generating-po-files-with-poedit-1-x">Generating .po files with Poedit 1.x</h4>
+
+<p>Internationalization functions in Twig files are not automatically parsed by gettext in Poedit 1.x. The quick and dirty workaround is to start each .twig file with <code class="prettyprint">{#&lt;?php#}</code>. By doing this, gettext will interpret whatever comes next as php, and start looking for <code class="prettyprint">__</code>.</p>
 
 <p>A nicer solution is to use <a href="https://github.com/umpirsky/Twig-Gettext-Extractor">Twig-Gettext-Extractor</a>, a special Twig parser to Poedit. The linked page contains instructions on how to set it up.</p>
 
-<p>Alternatively, you can use the parser for Python instead. This will throw a warning or two, but your strings are extracted! To add the parser, follow these steps:</p>
+<p>Alternatively, you can use a custom parser for Python instead. This will throw a warning or two, but your strings are extracted! To add the parser, follow these steps:</p>
 
 <ol>
 <li>Create a Poedit project for your theme if you haven&rsquo;t already, and make sure to add <code class="prettyprint">__</code> on the <em>Sources keywords</em> tab.</li>
@@ -1265,24 +1282,33 @@ Timber::render('single.twig', $context);
 <li>Save and Update!</li>
 </ol>
 
+<p>Be aware that with the Python parser, strings inside HTML attributes will not be recognized. This will not work:</p>
+<pre class="highlight twig"><code><span class="nt">&lt;nav</span> <span class="na">aria-label=</span><span class="s">"</span><span class="cp">{{</span> <span class="nv">__</span><span class="p">(</span><span class="s1">'Main Menu'</span><span class="p">,</span> <span class="s1">'my-text-domain'</span><span class="p">)</span> <span class="cp">}}</span><span class="s">"</span><span class="nt">&gt;</span>
+</code></pre>
+
+<p>As a workaround, you can assign the translation to a variable, which you can then use in the attribute.</p>
+<pre class="highlight twig"><code><span class="cp">{%</span> <span class="k">set</span> <span class="nv">nav_aria_label</span> <span class="err">=</span> <span class="nv">__</span><span class="p">(</span><span class="s1">'Main Menu'</span><span class="p">,</span> <span class="s1">'my-text-domain'</span><span class="p">)</span> <span class="cp">%}</span>
+<span class="nt">&lt;nav</span> <span class="na">aria-label=</span><span class="s">"</span><span class="cp">{{</span> <span class="nv">nav_aria_label</span> <span class="cp">}}</span><span class="s">"</span><span class="nt">&gt;</span>
+</code></pre>
+
 <hr>
 
 <h3 id="debugging">Debugging</h3>
 
 <h5 id="what-properties-are-inside-my-object">What properties are inside my object?</h5>
-<pre class="highlight twig"><code><span class="cp">{{</span><span class="nv">dump</span><span class="p">(</span><span class="nv">post</span><span class="p">)</span><span class="cp">}}</span>
+<pre class="highlight twig"><code><span class="cp">{{</span> <span class="nv">dump</span><span class="p">(</span><span class="nv">post</span><span class="p">)</span> <span class="cp">}}</span>
 </code></pre>
 
 <h5 id="what-properties-and-methods-are-inside-my-object">What properties and <em>methods</em> are inside my object?</h5>
 
 <p>Warning: Experimental!</p>
-<pre class="highlight twig"><code><span class="cp">{{</span><span class="nv">post</span><span class="o">|</span><span class="nf">print_a</span><span class="cp">}}</span>
+<pre class="highlight twig"><code><span class="cp">{{</span> <span class="nv">post</span><span class="o">|</span><span class="nf">print_a</span> <span class="cp">}}</span>
 </code></pre>
 
-<p>This outputs both the database stuff (like {{post.post_content}}) and the contents of methods (like {{post.thumbnail}})</p>
+<p>This outputs both the database stuff (like <code class="prettyprint">{{ post.post_content }}</code>) and the contents of methods (like <code class="prettyprint">{{ post.thumbnail }}</code>)</p>
 
 <h5 id="what-type-of-object-am-i-working-with">What type of object am I working with?</h5>
-<pre class="highlight twig"><code><span class="cp">{{</span><span class="nv">post</span><span class="o">|</span><span class="nf">get_class</span><span class="cp">}}</span>
+<pre class="highlight twig"><code><span class="cp">{{</span> <span class="nv">post</span><span class="o">|</span><span class="nf">get_class</span> <span class="cp">}}</span>
 </code></pre>
 
 <p>&hellip; will output something like <code class="prettyprint">TimberPost</code> or your custom wrapper object</p>
@@ -2013,7 +2039,7 @@ If arrays contain the key _cache_key, that one is used as cache key.</p>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nx">Routes</span><span class="o">::</span><span class="na">map</span><span class="p">(</span><span class="s1">'blog/:name'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$params</span><span class="p">){</span>
     <span class="nv">$query</span> <span class="o">=</span> <span class="s1">'posts_per_page=3&amp;post_type='</span><span class="o">.</span><span class="nv">$params</span><span class="p">[</span><span class="s1">'name'</span><span class="p">];</span>
-    <span class="nx">Routes</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">'archive.php'</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="nv">$query</span><span class="p">);</span>
+    <span class="nx">Routes</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">'archive.php'</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nv">$query</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
 <span class="p">});</span>
 
 <span class="nx">Routes</span><span class="o">::</span><span class="na">map</span><span class="p">(</span><span class="s1">'blog/:name/page/:pg'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$params</span><span class="p">){</span>
