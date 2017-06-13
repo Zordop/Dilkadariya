@@ -2700,7 +2700,7 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 <tr>
 <td><a href="#compile">compile</a></td>
 <td>bool/string</td>
-<td></td>
+<td>The returned output.</td>
 </tr>
 <tr>
 <td><a href="#compile_string">compile_string</a></td>
@@ -2710,7 +2710,7 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 <tr>
 <td><a href="#fetch">fetch</a></td>
 <td>bool/string</td>
-<td></td>
+<td>The returned output.</td>
 </tr>
 <tr>
 <td><a href="#get_context">get_context</a></td>
@@ -2724,8 +2724,8 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </tr>
 <tr>
 <td><a href="#get_post">get_post</a></td>
-<td>array/bool/null</td>
-<td></td>
+<td>\Timber\Post/bool</td>
+<td>Timber\Post object if a post was found, false if no post was found.</td>
 </tr>
 <tr>
 <td><a href="#get_posts">get_posts</a></td>
@@ -2759,7 +2759,7 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </tr>
 <tr>
 <td><a href="#get_widgets">get_widgets</a></td>
-<td>\Timber\FunctionWrapper</td>
+<td>string</td>
 <td></td>
 </tr>
 <tr>
@@ -2774,8 +2774,8 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </tr>
 <tr>
 <td><a href="#render">render</a></td>
-<td>boolean/string</td>
-<td></td>
+<td>bool/string</td>
+<td>The echoed output.</td>
 </tr>
 <tr>
 <td><a href="#render_string">render_string</a></td>
@@ -2826,11 +2826,11 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 
 <h2 id="compile">compile</h2>
 
-<p><code class="prettyprint">compile( mixed $filenames, array $data=array(), bool $expires=false, string $cache_mode=&quot;default&quot;, bool $via_render=false )</code></p>
+<p><code class="prettyprint">compile( array/string $filenames, array $data=array(), bool $expires=false, string $cache_mode=&quot;default&quot;, bool $via_render=false )</code></p>
 
-<p><strong>returns:</strong> <code class="prettyprint">bool/string</code> </p>
+<p><strong>returns:</strong> <code class="prettyprint">bool/string</code> The returned output.</p>
 
-<p>Compile function.</p>
+<p>Compile a Twig file. Passes data to a Twig file and returns the output.</p>
 
 <table><thead>
 <tr>
@@ -2841,8 +2841,8 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </thead><tbody>
 <tr>
 <td>$filenames</td>
-<td>mixed</td>
-<td></td>
+<td>array/string</td>
+<td>Name of the Twig file to render. If this is an array of files, Timber will</td>
 </tr>
 <tr>
 <td>$data</td>
@@ -2866,13 +2866,27 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </tr>
 </tbody></table>
 
+<h6 id="php">PHP</h6>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'firstname'</span> <span class="o">=&gt;</span> <span class="s1">'Jane'</span><span class="p">,</span>
+        <span class="s1">'lastname'</span> <span class="o">=&gt;</span> <span class="s1">'Doe'</span><span class="p">,</span>
+        <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'jane.doe@example.org'</span><span class="p">,</span>
+    <span class="p">);</span>
+        <span class="nv">$team_member</span> <span class="o">=</span> <span class="nx">Timber</span><span class="o">::</span><span class="na">compile</span><span class="p">(</span> <span class="s1">'team-member.twig'</span><span class="p">,</span> <span class="nv">$data</span> <span class="p">);</span>
+</code></pre>
+
+<p>render the first file that exists.
+                                    array, the first value is used for non-logged in visitors, the second for users.
+                                    Default false.</p>
+
 <h2 id="compile_string">compile_string</h2>
 
-<p><code class="prettyprint">compile_string( mixed $string, array $data=array() )</code></p>
+<p><code class="prettyprint">compile_string( string $string, array $data=array() )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">bool/string</code> </p>
 
-<p>Compile string.</p>
+<p>Compile a string.</p>
 
 <table><thead>
 <tr>
@@ -2883,8 +2897,8 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </thead><tbody>
 <tr>
 <td>$string</td>
-<td>mixed</td>
-<td></td>
+<td>string</td>
+<td>A string with Twig variables.</td>
 </tr>
 <tr>
 <td>$data</td>
@@ -2893,11 +2907,19 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </tr>
 </tbody></table>
 
+<h6 id="php">PHP</h6>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'Jane Doe'</span><span class="p">,</span>
+    <span class="p">);</span>
+        <span class="nv">$welcome</span> <span class="o">=</span> <span class="nx">Timber</span><span class="o">::</span><span class="na">compile_string</span><span class="p">(</span> <span class="s1">'Hi {{ username }}, I’m a string with a custom Twig variable'</span><span class="p">,</span> <span class="nv">$data</span> <span class="p">);</span>
+</code></pre>
+
 <h2 id="fetch">fetch</h2>
 
-<p><code class="prettyprint">fetch( mixed $filenames, array $data=array(), bool $expires=false, string $cache_mode=&quot;default&quot; )</code></p>
+<p><code class="prettyprint">fetch( array/string $filenames, array $data=array(), bool $expires=false, string $cache_mode=&quot;default&quot; )</code></p>
 
-<p><strong>returns:</strong> <code class="prettyprint">bool/string</code> </p>
+<p><strong>returns:</strong> <code class="prettyprint">bool/string</code> The returned output.</p>
 
 <p>Fetch function.</p>
 
@@ -2910,8 +2932,8 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </thead><tbody>
 <tr>
 <td>$filenames</td>
-<td>mixed</td>
-<td></td>
+<td>array/string</td>
+<td>Name of the Twig file to render. If this is an array of files, Timber will</td>
 </tr>
 <tr>
 <td>$data</td>
@@ -2962,11 +2984,11 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 
 <h2 id="get_post">get_post</h2>
 
-<p><code class="prettyprint">get_post( bool $query=false, string $PostClass=&quot;Timber\Post&quot; )</code></p>
+<p><code class="prettyprint">get_post( bool $query=false, string/string/array $PostClass=&quot;Timber\Post&quot; )</code></p>
 
-<p><strong>returns:</strong> <code class="prettyprint">array/bool/null</code> </p>
+<p><strong>returns:</strong> <code class="prettyprint">\Timber\Post/bool</code> Timber\Post object if a post was found, false if no post was found.</p>
 
-<p>Get post.</p>
+<p>Get a post by post ID or query (as a query string or an array of arguments).</p>
 
 <table><thead>
 <tr>
@@ -2982,8 +3004,8 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </tr>
 <tr>
 <td>$PostClass</td>
-<td>string</td>
-<td></td>
+<td>string/string/array</td>
+<td>Optional. Class to use to wrap the returned post object. Default &lsquo;Timber\Post&rsquo;.</td>
 </tr>
 </tbody></table>
 
@@ -3171,7 +3193,7 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 
 <p><code class="prettyprint">get_widgets( int/string $widget_id )</code></p>
 
-<p><strong>returns:</strong> <code class="prettyprint">\Timber\FunctionWrapper</code> </p>
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
 
 <p>Get widgets.</p>
 
@@ -3251,11 +3273,11 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 
 <h2 id="render">render</h2>
 
-<p><code class="prettyprint">render( mixed $filenames, array $data=array(), bool $expires=false, string $cache_mode=&quot;default&quot; )</code></p>
+<p><code class="prettyprint">render( array/string $filenames, array $data=array(), bool $expires=false, string $cache_mode=&quot;default&quot; )</code></p>
 
-<p><strong>returns:</strong> <code class="prettyprint">boolean/string</code> </p>
+<p><strong>returns:</strong> <code class="prettyprint">bool/string</code> The echoed output.</p>
 
-<p>Render function.</p>
+<p>Render function. Passes data to a Twig file and echoes the output.</p>
 
 <table><thead>
 <tr>
@@ -3266,8 +3288,8 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </thead><tbody>
 <tr>
 <td>$filenames</td>
-<td>mixed</td>
-<td></td>
+<td>array/string</td>
+<td>Name of the Twig file to render. If this is an array of files, Timber will</td>
 </tr>
 <tr>
 <td>$data</td>
@@ -3286,13 +3308,23 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </tr>
 </tbody></table>
 
+<h6 id="php">PHP</h6>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="nv">$context</span> <span class="o">=</span> <span class="nx">Timber</span><span class="o">::</span><span class="na">get_context</span><span class="p">();</span>
+        <span class="nx">Timber</span><span class="o">::</span><span class="na">render</span><span class="p">(</span> <span class="s1">'index.twig'</span><span class="p">,</span> <span class="nv">$context</span> <span class="p">);</span>
+</code></pre>
+
+<p>render the first file that exists.
+                                    array, the first value is used for non-logged in visitors, the second for users.
+                                    Default false.</p>
+
 <h2 id="render_string">render_string</h2>
 
-<p><code class="prettyprint">render_string( mixed $string, array $data=array() )</code></p>
+<p><code class="prettyprint">render_string( string $string, array $data=array() )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">bool/string</code> </p>
 
-<p>Render string.</p>
+<p>Render a string with Twig variables.</p>
 
 <table><thead>
 <tr>
@@ -3303,8 +3335,8 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 </thead><tbody>
 <tr>
 <td>$string</td>
-<td>mixed</td>
-<td></td>
+<td>string</td>
+<td>A string with Twig variables.</td>
 </tr>
 <tr>
 <td>$data</td>
@@ -3312,6 +3344,14 @@ For the desired usage of <code class="prettyprint">[youtube id=xxxx]</code> we o
 <td></td>
 </tr>
 </tbody></table>
+
+<h6 id="php">PHP</h6>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'Jane Doe'</span><span class="p">,</span>
+    <span class="p">);</span>
+        <span class="nx">Timber</span><span class="o">::</span><span class="na">render_string</span><span class="p">(</span> <span class="s1">'Hi {{ username }}, I’m a string with a custom Twig variable'</span><span class="p">,</span> <span class="nv">$data</span> <span class="p">);</span>
+</code></pre>
 
 <h2 id="init">init</h2>
 
@@ -4603,11 +4643,6 @@ Gets the post thumbnail image object
 <td></td>
 </tr>
 <tr>
-<td><a href="#get_preview">get_preview</a></td>
-<td>string</td>
-<td>of the post preview</td>
-</tr>
-<tr>
 <td>id</td>
 <td>string</td>
 <td>$id the numeric WordPress id of a post</td>
@@ -4904,7 +4939,7 @@ Gets the post thumbnail image object
 
 <h2 id="convert">convert</h2>
 
-<p><code class="prettyprint">convert( array $data, string $class )</code></p>
+<p><code class="prettyprint">convert( array/\Timber\WP_Post $data, string $class )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
 
@@ -4919,7 +4954,7 @@ Gets the post thumbnail image object
 </thead><tbody>
 <tr>
 <td>$data</td>
-<td>array</td>
+<td>array/\Timber\WP_Post</td>
 <td></td>
 </tr>
 <tr>
@@ -5088,7 +5123,9 @@ Gets the post thumbnail image object
 <pre class="highlight html"><code>    This post is from <span class="nt">&lt;span&gt;</span>Recipes<span class="nt">&lt;/span&gt;</span>
 </code></pre>
 
-<h2 id="get_preview">get_preview</h2>
+<h2 id="get_preview"><strike>get_preview</strike></h2>
+
+<p><strong>DEPRECATED</strong> since 1.3.1, use {{ post.preview }} instead</p>
 
 <p><code class="prettyprint">get_preview( mixed/int $len=50, bool $force=false, string $readmore=&quot;Read More&quot;, bool/bool/string $strip=true, string $end=&quot;&amp;hellip;&quot; )</code></p>
 
@@ -5936,11 +5973,6 @@ Gets the post thumbnail image object
 <td>the language setting ex: en-US</td>
 </tr>
 <tr>
-<td>language_attributes</td>
-<td>string</td>
-<td>of language attributes for usage in the <html> tag</td>
-</tr>
-<tr>
 <td><a href="#link">link</a></td>
 <td>string</td>
 <td></td>
@@ -6033,6 +6065,14 @@ Gets the post thumbnail image object
 <p><code class="prettyprint">icon( )</code></p>
 
 <p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
+
+<h2 id="language_attributes">language_attributes</h2>
+
+<p><code class="prettyprint">language_attributes( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> </p>
+
+<p>Returns the language attributes that you&rsquo;re looking for</p>
 
 <h2 id="link">link</h2>
 
@@ -7904,14 +7944,6 @@ Gets the post thumbnail image object
 
 <p>Deletes all resized versions of an image when the source is deleted or its meta data is regenerated</p>
 
-<h2 id="add_constants">add_constants</h2>
-
-<p><code class="prettyprint">add_constants( )</code></p>
-
-<p><strong>returns:</strong> <code class="prettyprint">void</code> </p>
-
-<p>Adds a constant defining the path to the content directory relative to the site for example /wp-content or /content</p>
-
 <h2 id="is_in_theme_dir">is_in_theme_dir</h2>
 
 <p><code class="prettyprint">is_in_theme_dir( mixed $path )</code></p>
@@ -8176,6 +8208,14 @@ Gets the post thumbnail image object
 <td></td>
 </tr>
 </tbody></table>
+
+<h2 id="get_content_subdir">get_content_subdir</h2>
+
+<p><code class="prettyprint">get_content_subdir( )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">string</code> (ex: /wp-content or /content)</p>
+
+<p>Get the path to the content directory relative to the site. This replaces the WP_CONTENT_SUBDIR constant</p>
 
 <h2 id="get_current_url">get_current_url</h2>
 
@@ -8478,6 +8518,33 @@ Gets the post thumbnail image object
 </thead><tbody>
 <tr>
 <td>$link</td>
+<td>mixed</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="starts_with">starts_with</h2>
+
+<p><code class="prettyprint">starts_with( mixed $haystack, mixed $starts_with )</code></p>
+
+<p><strong>returns:</strong> <code class="prettyprint">boolean</code> </p>
+
+<p>Check to see if the URL begins with the string in question Because it&rsquo;s a URL we don&rsquo;t care about protocol (HTTP vs HTTPS) Or case (so it&rsquo;s cAsE iNsEnSeTiVe)</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$haystack</td>
+<td>mixed</td>
+<td></td>
+</tr>
+<tr>
+<td>$starts_with</td>
 <td>mixed</td>
 <td></td>
 </tr>
