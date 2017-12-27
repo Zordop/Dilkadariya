@@ -95,6 +95,10 @@ class Menu extends Core {
 	 * @param int $menu_id
 	 */
 	protected function init( $menu_id ) {
+
+		$mic = new MenuItemCollection($menu_id);
+		$this->items = $mic;
+
 		$menu = wp_get_nav_menu_items($menu_id);
 		if ( $menu ) {
 			_wp_menu_item_classes_by_context($menu);
