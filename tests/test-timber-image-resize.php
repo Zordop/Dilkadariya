@@ -106,11 +106,41 @@ class TestTimberImageResize extends Timber_UnitTestCase {
 		$arch = TestTimberImage::copyTestImage('arch.jpg');
 		$resized = TimberImageHelper::resize($arch, false, 250);
 
+
 		$resized = str_replace('http://example.org', '', $resized);
 		$resized = TimberUrlHelper::url_to_file_system( $resized );
 
 		$is_sized = TestTimberImage::checkSize($resized, 375, 250);
 		$this->assertTrue( $is_sized );
+	}
+
+	function testJPEGQuality() {
+		//make image at best quality
+		$arch = TestTimberImage::copyTestImage('arch.jpg');
+		$resized = Timber\ImageHelper::resize($arch, 500, 500, 'default', true, 100);
+		$resized = str_replace('http://example.org', '', $resized);
+		$resized = TimberUrlHelper::url_to_file_system( $resized );
+
+		$fileSizeBig = filesize($resized);
+
+		// make image at default quality
+		$arch = TestTimberImage::copyTestImage('arch.jpg');
+		$resized = Timber\ImageHelper::resize($arch, 500, 500, 'default', true);
+		$resized = str_replace('http://example.org', '', $resized);
+		$resized = TimberUrlHelper::url_to_file_system( $resized );
+
+		$fileSizeDefault = filesize($resized);
+
+		// make image at low quality
+		$resized = Timber\ImageHelper::resize($arch, 500, 500, 'default', true, 1);
+		$resized = str_replace('http://example.org', '', $resized);
+		$resized = TimberUrlHelper::url_to_file_system( $resized );
+
+		$fileSizeSmall = filesize($resized);
+
+		$this->assertLessThan($fileSizeBig, $fileSizeSmall);
+		$this->assertLessThan($fileSizeBig, $fileSizeDefault);
+		$this->assertLessThan($fileSizeDefault, $fileSizeSmall);
 	}
 
 	function testWPMLurlRemote() {

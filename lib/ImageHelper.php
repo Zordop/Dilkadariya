@@ -43,12 +43,13 @@ class ImageHelper {
 	 * New dimensions are achieved by cropping to maintain ratio.
 	 *
 	 * @api
-	 * @param string  		$src an URL (absolute or relative) to the original image
-	 * @param int|string	$w target width(int) or WordPress image size (WP-set or user-defined).
-	 * @param int     		$h target height (ignored if $w is WP image size). If not set, will ignore and resize based on $w only.
-	 * @param string  		$crop your choices are 'default', 'center', 'top', 'bottom', 'left', 'right'
-	 * @param bool    		$force
-	 * @param int     		$quality compression quality 0-100 if image format is jpeg
+	 * @param string     $src an URL (absolute or relative) to the original image.
+	 * @param int|string $w target width(int) or WordPress image size (WP-set or user-defined).
+	 * @param int        $h target height (ignored if $w is WP image size). If not set, will ignore and resize based on $w only.
+	 * @param string     $crop your choices are 'default', 'center', 'top', 'bottom', 'left', 'right'.
+	 * @param bool       $force by setting this to true, it will "force" the regeneration of the image.
+	 * @param int|null   $quality compression quality 0-100 if image format is jpeg
+	 *                   null will use WP's default.
 	 * @example
 	 * ```twig
 	 * <img src="{{ image.src | resize(300, 200, 'top') }}" />
@@ -58,7 +59,7 @@ class ImageHelper {
 	 * ```
 	 * @return string (ex: )
 	 */
-	public static function resize( $src, $w, $h = 0, $crop = 'default', $force = false, $quality = 60 ) {
+	public static function resize( $src, $w, $h = 0, $crop = 'default', $force = false, $quality = null ) {
 		if ( !is_numeric($w) && is_string($w) ) {
 			if ( $sizes = self::find_wp_dimensions($w) ) {
 				$w = $sizes['w'];
@@ -66,6 +67,9 @@ class ImageHelper {
 			} else {
 				return $src;
 			}
+		}
+		if ( is_null($quality) ) {
+			$quality = apply_filters('wp_editor_set_quality', 82, 'image/jpeg');
 		}
 		$op = new Image\Operation\Resize($w, $h, $crop, $quality);
 		return self::_operate($src, $op, $force);
