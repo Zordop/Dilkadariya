@@ -416,10 +416,16 @@
 		 */
 		function testPostMetaMetaException(){
 			$post_id = $this->factory->post->create();
+
 			$post = new Timber\Post($post_id);
 			$string = Timber::compile_string('My {{ post.meta }}', array('post' => $post));
 			$this->assertEquals('My', trim($string));
+
 			update_post_meta($post_id, 'meta', 'steak');
+			$post = new Timber\Post($post_id);
+			$string = Timber::compile_string('My {{ post.meta }}', array('post' => $post));
+			$this->assertEquals('My steak', trim($string));
+			
 			$post = new Timber\Post($post_id);
 			$string = Timber::compile_string('My {{post.custom.meta}}', array('post' => $post));
 			//sorry you can't over-write methods now
