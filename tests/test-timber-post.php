@@ -411,10 +411,13 @@
 			//$this->assertEquals($post->the_field_name_flat, 'the-value');
 		}*/
 
+		/**
+ 		 * This test is confirming that if someone
+		 */
 		function testPostMetaMetaException(){
 			$post_id = $this->factory->post->create();
 			$post = new Timber\Post($post_id);
-			$string = Timber::compile_string('My {{post.meta}}', array('post' => $post));
+			$string = Timber::compile_string('My {{ post.meta }}', array('post' => $post));
 			$this->assertEquals('My', trim($string));
 			update_post_meta($post_id, 'meta', 'steak');
 			$post = new Timber\Post($post_id);

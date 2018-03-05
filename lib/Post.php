@@ -768,7 +768,17 @@ class Post extends Core implements CoreInterface {
 	 * @param string $field_name The field name for which you want to get the value.
 	 * @return mixed The meta field value.
 	 */
-	public function meta( $field_name ) {
+	public function meta( $field_name = null ) {
+
+		/**
+		 * if someone has a custom field named "meta" things get weird. 
+		 * This catches it on the off-chance the field is actually named meta
+		 */
+		if ( $field_name === null ) {
+			$field_name = 'meta';
+		}
+
+
 		/**
 		 * Filters the value for a post meta field before it is fetched from the database.
 		 *
@@ -834,7 +844,6 @@ class Post extends Core implements CoreInterface {
 			'2.0.0',
 			'timber/post/meta'
 		);
-
 		$value = $this->convert($value, __CLASS__);
 		return $value;
 	}
