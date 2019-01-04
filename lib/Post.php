@@ -56,17 +56,12 @@ use WP_Post;
  * </article>
  * ```
  */
-class Post extends Core implements CoreInterface, Setupable {
+class Post extends Core implements CoreInterface, Setupable, ObjectFactoryInterface {
 
 	/**
 	 * @var string The name of the class to handle images by default
 	 */
 	public $ImageClass = 'Timber\Image';
-
-	/**
-	 * @var string The name of the class to handle posts by default
-	 */
-	public $PostClass = 'Timber\Post';
 
 	/**
 	 * @var string The name of the class to handle terms by default
@@ -203,9 +198,28 @@ class Post extends Core implements CoreInterface, Setupable {
 	 *
 	 * @param mixed $pid
 	 */
-	public function __construct( $pid = null ) {
-		$pid = $this->determine_id($pid);
-		$this->init($pid);
+	private function __construct( \WP_Post $post ) {
+		$this->init($post);
+	}
+
+	/**
+	 * Get an instance of the queried object
+	 * Accepts an instance of WP_Post or a Post ID
+	 *
+	 * @return mixed
+	 */
+	public static function get( $query_object ) {
+		$post_instance = null;
+
+		if ( is_numeric($query_object) ) {
+			$query_object = get_post( $query_object );
+		}
+
+		if ( $query_object instanceof \WP_Post ) {
+			$post_instance = new self( $query_object );
+		}
+
+		return apply_filters('timber/post/postclass', $post_instance);
 	}
 
 	/**
@@ -259,8 +273,7 @@ class Post extends Core implements CoreInterface, Setupable {
 	 * @return \Timber\Post The post instance.
 	 */
 	public function setup() {
-		global $post;
-		global $wp_query;
+		global $post, $wp_query;
 
 		// Overwrite post global.
 		// phpcs:ignore WordPress.WP.GlobalVariablesOverride.OverrideProhibited
@@ -301,50 +314,12 @@ class Post extends Core implements CoreInterface, Setupable {
 	 */
 	protected static function is_previewing() {
 		global $wp_query;
+		$is_previewing = false;
 		if ( isset($_GET['preview']) && isset($_GET['preview_nonce']) && wp_verify_nonce($_GET['preview_nonce'], 'post_preview_'.$wp_query->queried_object_id) ) {
-			return true;
+			$is_previewing = true;
 		}
-	}
 
-	/**
-	 * tries to figure out what post you want to get if not explictly defined (or if it is, allows it to be passed through)
-	 * @internal
-	 * @param mixed a value to test against
-	 * @return int the numberic id we should be using for this post object
-	 */
-	protected function determine_id( $pid ) {
-		global $wp_query;
-		if ( $pid === null &&
-			isset($wp_query->queried_object_id)
-			&& $wp_query->queried_object_id
-			&& isset($wp_query->queried_object)
-			&& is_object($wp_query->queried_object)
-			&& get_class($wp_query->queried_object) == 'WP_Post'
-		) {
-			$pid = $wp_query->queried_object_id;
-		} else if ( $pid === null && $wp_query->is_home && isset($wp_query->queried_object_id) && $wp_query->queried_object_id ) {
-			//hack for static page as home page
-			$pid = $wp_query->queried_object_id;
-		} else if ( $pid === null ) {
-			$gtid = false;
-			$maybe_post = get_post();
-			if ( isset($maybe_post->ID) ) {
-				$gtid = true;
-			}
-			if ( $gtid ) {
-				$pid = get_the_ID();
-			}
-			if ( !$pid ) {
-				global $wp_query;
-				if ( isset($wp_query->query['p']) ) {
-					$pid = $wp_query->query['p'];
-				}
-			}
-		}
-		if ( $pid === null && ($pid_from_loop = PostGetter::loop_to_id()) ) {
-			$pid = $pid_from_loop;
-		}
-		return $pid;
+		return $is_previewing;
 	}
 
 	/**
@@ -401,13 +376,7 @@ class Post extends Core implements CoreInterface, Setupable {
 	 * @internal
 	 * @param integer $pid
 	 */
-	protected function init( $pid = null ) {
-		if ( $pid === null ) {
-			$pid = get_the_ID();
-		}
-		if ( is_numeric($pid) ) {
-			$this->ID = $pid;
-		}
+	protected function init( \WP_Post $pid ) {
 		$post_info = $this->get_info($pid);
 		$this->import($post_info);
 	}
@@ -1635,10 +1604,7 @@ class Post extends Core implements CoreInterface, Setupable {
 	 * @return bool|\Timber\Post
 	 */
 	public function parent() {
-		if ( !$this->post_parent ) {
-			return false;
-		}
-		return new $this->PostClass($this->post_parent);
+		return self::get($this->post_parent);
 	}
 
 	/**
@@ -1800,5 +1766,4 @@ class Post extends Core implements CoreInterface, Setupable {
 
 		return $video;
 	}
-
 }

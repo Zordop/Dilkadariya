@@ -276,8 +276,11 @@ class Timber {
 		$context = self::context_global();
 
 		if ( is_singular() ) {
-			$post = ( new Post() )->setup();
-			$context['post'] = $post;
+			$post = Post::get(get_queried_object());
+			if ($post !== null ) {
+				$post->setup();
+				$context['post'] = $post;
+			}
 		}
 		elseif ( is_archive() || is_home() ) {
 			$context['posts'] = new PostQuery();

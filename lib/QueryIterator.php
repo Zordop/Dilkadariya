@@ -70,7 +70,7 @@ class QueryIterator implements \Iterator, \Countable {
 
 	public function get_posts( $return_collection = false ) {
 		if ( isset($this->_query->posts) ) {
-			$posts = new PostCollection($this->_query->posts, $this->_posts_class);
+			$posts = new PostCollection($this->_query->posts);
 			return ($return_collection) ? $posts : $posts->get_posts();
 		}
 	}
