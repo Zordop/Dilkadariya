@@ -216,10 +216,15 @@ class Post extends Core implements CoreInterface, Setupable, ObjectFactoryInterf
 		}
 
 		if ( $query_object instanceof \WP_Post ) {
-			$post_instance = new self( $query_object );
+			$class = apply_filters('timber/post/class', static::class, $query_object);
+			// post-type specific class filters
+			$class = apply_filters("timber/post/class/{$query_object->post_type}", $class, $query_object);
+
+			$post_instance = new $class;
 		}
 
-		return apply_filters('timber/post/postclass', $post_instance);
+		// still allow for arbitrary logic on this instance
+		return apply_filters('timber/post/instance', $post_instance);
 	}
 
 	/**
