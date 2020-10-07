@@ -52,7 +52,6 @@ class MenuItemFactory {
 	protected function build($item, Menu $menu) : CoreInterface {
 		$class = apply_filters('timber/menuitem/classmap', MenuItem::class, $item, $menu);
 
-		// @todo call ::build() instead of constructor
-		return new $class($item, $menu);
+		return $class::build($item, $menu);
 	}
 }

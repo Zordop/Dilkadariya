@@ -886,6 +886,7 @@ class TestTimberMenu extends Timber_UnitTestCase {
 	}
 
 	function testCustomMenuItemClass() {
+		$this->markTestSkipped('@todo is this already covered in test-menu-item-factory?');
 		$term    = self::_createTestMenu();
 		$menu_id = $term['term_id'];
 		$menu_items = wp_get_nav_menu_items($menu_id);

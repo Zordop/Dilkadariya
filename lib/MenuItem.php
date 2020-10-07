@@ -87,9 +87,21 @@ class MenuItem extends Core implements CoreInterface, MetaInterface {
 	 * @internal
 	 * @param array|object $data
 	 * @param \Timber\Menu $menu The `Timber\Menu` object the menu item is associated with.
-	 * @todo make this protected and implement ::build() instead
+	 * @return \Timber\MenuItem a new MenuItem object associated with the given Menu
 	 */
-	public function __construct( $data, $menu = null ) {
+	public static function build($data, Menu $menu) : self {
+		$item = new static();
+		$item->init($data, $menu);
+
+		return $item;
+	}
+
+	/**
+	 * @internal
+	 */
+	protected function __construct() {}
+
+	protected function init($data, $menu) {
 		$this->menu = $menu;
 		$data       = (object) $data;
 		$this->import($data);
