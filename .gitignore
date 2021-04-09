@@ -12,6 +12,7 @@ wp-content
 timber-starter-theme
 docs/markdown
 .tmp
+/tmp
 node_modules
 docs/cache
 docs/mkdocs
