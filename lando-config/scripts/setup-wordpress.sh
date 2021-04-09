@@ -17,12 +17,10 @@ main() {
   BOLD=$(tput bold)
   NORMAL=$(tput sgr0)
 
+	# We do this for now to maintain compatibility with VVV. If in the future
+	# we migrate over to Lando completely, Composer can do this for us with
+	# custom installer paths.
   WP_DIR="$LANDO_MOUNT/wordpress"
-
-  if ! [[ -d "$WP_DIR"/wp-content/plugins/timber-library ]] ; then
-    echo 'Linking timber plugin directory...'
-    ln -s "../../../" "$WP_DIR"/wp-content/plugins/timber-library
-  fi
 
   if ! [[ -d "$WP_DIR"/wp-content/plugins/advanced-custom-fields ]] ; then
     echo 'Linking timber plugin directory...'
@@ -62,54 +60,13 @@ EOF
   if wp_installed ; then
     echo 'WordPress is installed'
   else
-    if [[ $INTERACTIVE = 'YES' ]] ; then
-
-      #
-      # Normal/default interactive mode: prompt the user for WP settings
-      #
-
-      read -p "${BOLD}Site URL${NORMAL} (https://timber.lndo.site): " URL
-      URL=${URL:-'https://timber.lndo.site'}
-
-      read -p "${BOLD}Site Title${NORMAL} (Timber): " TITLE
-      TITLE=${TITLE:-'Timber'}
-
-      # Determine the default username/email to suggest based on git config
-      DEFAULT_EMAIL=$(git config --global user.email)
-      DEFAULT_EMAIL=${DEFAULT_EMAIL:-'admin@example.com'}
-      DEFAULT_USERNAME=$(echo $DEFAULT_EMAIL | sed 's/@.*$//')
-
-      read -p "${BOLD}Admin username${NORMAL} ($DEFAULT_USERNAME): " ADMIN_USER
-      ADMIN_USER=${ADMIN_USER:-"$DEFAULT_USERNAME"}
-
-      read -p "${BOLD}Admin password${NORMAL} (timber): " ADMIN_PASSWORD
-      ADMIN_PASSWORD=${ADMIN_PASSWORD:-'timber'}
-
-      read -p "${BOLD}Admin email${NORMAL} ($DEFAULT_EMAIL): " ADMIN_EMAIL
-      ADMIN_EMAIL=${ADMIN_EMAIL:-"$DEFAULT_EMAIL"}
-
-    else
-
-      #
-      # NON-INTERACTIVE MODE
-      # ONE DOES NOT SIMPLY PROMPT FOR USER PREFERENCES
-      #
-
-      URL='http://timber.lndo.site'
-      TITLE='Timber'
-      ADMIN_USER='timber'
-      ADMIN_PASSWORD='timber'
-      ADMIN_EMAIL='timber+travisci@sitecrafting.com'
-
-    fi
-
     # install WordPress
     wp core install \
-      --url="$URL" \
-      --title="$TITLE" \
-      --admin_user="$ADMIN_USER" \
-      --admin_password="$ADMIN_PASSWORD" \
-      --admin_email="$ADMIN_EMAIL" \
+      --url="https://timber.lndo.site" \
+      --title="Timber Dev" \
+      --admin_user="timber" \
+      --admin_password="timber" \
+      --admin_email="timber@example.com" \
       --skip-email \
       --path="$WP_DIR"
   fi
@@ -118,21 +75,6 @@ EOF
   uninstall_plugins hello akismet
   wp --quiet --path="$WP_DIR" plugin activate advanced-custom-fields
   wp --quiet --path="$WP_DIR" plugin activate co-authors-plus
-
-  # currently the timber plugin will not activate since incorrect code structure
-  # wp --quiet --path="$WP_DIR" plugin activate timber-library
-
-  # uninstall stock themes
-  wp --quiet theme uninstall \
-    twentyten \
-    twentyeleven \
-    twentytwelve \
-    twentythirteen \
-    twentyfourteen \
-    twentyfifteen \
-    twentysixteen \
-    twentyseventeen \
-    --path="$WP_DIR"
 
   wp option set permalink_structure '/%postname%/' --path="$WP_DIR"
   wp rewrite flush --path="$WP_DIR"

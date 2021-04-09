@@ -3,7 +3,77 @@ title: "Automated Testing"
 order: "1900"
 ---
 
-## Setup a testing environment with PHPUnit
+As of Timber 2.x we have a new, experimental dev environment setup that uses [Lando](https://docs.lando.dev/). Unlike Vagrant/VVV, Lando is built on top of Docker Compose, and thus is completely self-contained. Full support for
+
+## Setup a Lando dev environment (experimental)
+
+### 1. Install Lando
+
+Follow Lando's [Installation](https://docs.lando.dev/basics/installation.html) guide, making sure your system meets their system requirements. If you run Linux, Mac, or Windows, chances are you will be fine.
+
+Docker is a prerequisite, but if you're on Mac or Windows, the Lando installer will install Docker for you.
+
+Running `lando version` should print the version number once installed.
+
+### 2. Start Lando
+
+Now you're ready to rock:
+
+```
+lando start
+```
+
+This will take a few minutes (but should still be faster than booting VVV from scratch). A helper script running inside Lando's main WordPress container will install WordPress core, the WordPress Unit Test Suite, and create an admin user with the following info:
+
+* Username: `timber`
+* Password: `timber`
+* Email: `timber@example.com`
+
+It will also install dev dependencies, such as PHPUnit, and plugins we integrate with directly:
+
+* Advanced Custom Fields
+* CoAuthors Plus
+* Carbon Fields (work in progress)
+
+### 3. Start hacking
+
+Out of the box, the Lando environment has a few shortcuts for quickly running miscellaneous dev commands. See [Lando Tooling](https://docs.lando.dev/guides/lando-101/lando-tooling.html) to learn how this works.
+
+#### Unit tests
+
+The `lando phpunit` command wraps PHPUnit, which is installed automatically:
+
+```sh
+# Run the whole suite:
+lando phpunit
+# Run tests tagged with the posts-api @group:
+lando phpunit --group posts-api
+```
+
+Accepts any args that `phpunit` (7.x) normally accepts.
+
+#### Coding standards
+
+These commands analyze (and/or fix) Timber's adherence to coding standards, which are decalared in phpcs.xml.
+
+```sh
+# Run all standards checks:
+lando phpcs
+# Summarize standards violations:
+lando phpcs-summary
+# Fix any standards violations that are possible to fix automatically:
+lando phpcs-fix
+```
+
+#### Static Analysis
+
+PHPStan can help find potential bugs and unsafe code:
+
+```sh
+lando phpstan
+```
+
+## Setup a testing environment with PHPUnit (standard)
 
 Follow the setup steps for [Varying Vagrant Vagrants](https://github.com/Varying-Vagrant-Vagrants/VVV). If you’re having trouble I recommend starting 100% fresh (uninstall and delete everything including VirtualBox). For this walk-through we’re going to start from scratch:
 
