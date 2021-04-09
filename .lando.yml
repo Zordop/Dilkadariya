@@ -37,11 +37,6 @@ services:
   phpmyadmin:
     type: phpmyadmin:4.7
 
-  mailhog:
-    type: mailhog
-    hogfrom:
-      - appserver
-
   docs:
     type: nginx
     ssl: true
@@ -63,32 +58,34 @@ tooling:
     cmd: '/app/lando-config/scripts/install-wp-tests.sh'
     description: 'Installs test suite.'
 
-  unit:
+  phpunit:
     service: appserver
     cmd: '/app/vendor/bin/phpunit'
     description: 'Run unit tests'
 
-  sniff:
+  phpcs:
     service: appserver
-    cmd: 'composer sniff'
+    cmd: '/app/vendor/bin/phpcs --standard=/app/phpcs.xml'
     description: 'Run phpcs code sniffer'
 
-  sniff-summary:
+  phpcs-summary:
     service: appserver
-    cmd: 'composer sniff-summary'
+    cmd: '/app/vendor/bin/phpcs --standard=/app/phpcs.xml --report=summary'
     description: 'Summarize phpcs results'
 
-  sniff-fix:
+  phpcbf:
     service: appserver
-    cmd: 'composer sniff-fix'
+    cmd: '/app/vendor/bin/phpcbf --standard=/app/vendor/bin/phpcs.xml'
     description: 'Fix coding standards issues that are automatically fixable'
+
+  phpstan:
+    service: appserver
+    cmd: '/app/vendor/bin/phpstan'
+    description: 'Run static analysis'
 
 proxy:
   appserver:
     - timber.lndo.site
-
-  mailhog:
-    - mail.timber.lndo.site
 
   phpmyadmin:
     - phpmyadmin.timber.lndo.site
