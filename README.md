@@ -2,20 +2,19 @@
 <a href="https://upstatement.com/timber/"><img src="http://i.imgur.com/PbEwvZ9.png" style="display:block; margin:auto; width:100%; max-width:100%"/></a>
 </div>
 
-By 
-[Jared Novack](https://github.com/jarednova) ([@jarednova](https://twitter.com/jarednova)), 
-[Lukas Gächter](https://github.com/gchtr) ([@lgaechter](https://twitter.com/lgaechter)), 
+By
+[Jared Novack](https://github.com/jarednova) ([@jarednova](https://twitter.com/jarednova)),
+[Lukas Gächter](https://github.com/gchtr) ([@lgaechter](https://twitter.com/lgaechter)),
 [Coby Tamayo](https://github.com/acobster) ([@cobytamayo](https://keybase.io/acobster)),
 [Maciej Palmowski](https://github.com/palmiak) ([@palmiak_fp](https://twitter.com/palmiak_fp)),
 [Nicolas Lemoine](https://github.com/nlemoine) ([@nlemoine](https://niconico.fr/))
 [Upstatement](https://twitter.com/upstatement) and [hundreds of other GitHub contributors](https://github.com/timber/timber/graphs/contributors)
 
-[![Build Status](https://github.com/timber/timber/actions/workflows/test.yml/badge.svg)](https://github.com/timber/timber/actions/workflows/test.yml)
-[![Coverage Status](https://img.shields.io/coveralls/timber/timber.svg)](https://coveralls.io/github/timber/timber)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/timber/timber.svg)](https://scrutinizer-ci.com/g/timber/timber/?branch=master)
-[![Latest Stable Version](https://img.shields.io/packagist/v/timber/timber.svg)](https://packagist.org/packages/timber/timber)
-[![WordPress Download Count](https://img.shields.io/wordpress/plugin/dt/timber-library.svg)](https://wordpress.org/plugins/timber-library/)
-[![WordPress Rating](https://img.shields.io/wordpress/plugin/r/timber-library.svg)](https://wordpress.org/support/plugin/timber-library/reviews/)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/timber/timber/Timber%20Tests)
+![Coveralls](https://img.shields.io/coveralls/github/timber/timber)
+![Packagist Downloads](https://img.shields.io/packagist/dt/timber/timber)
+![Latest Stable Version](https://img.shields.io/packagist/v/timber/timber)
+![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/timber/timber)
 
 > Because WordPress is awesome, but the_loop isn’t.
 
@@ -52,7 +51,7 @@ Once Timber is installed, it gives any WordPress theme the ability to take advan
 
 ### Installation
 
-The GitHub version of Timber requires [Composer](https://getcomposer.org/download/) and is setup for inclusion _within_ a theme or plugin. If you'd prefer one-click installation for your site, you should use the [WordPress.org](https://wordpress.org/plugins/timber-library/) version.
+Timber requires [Composer](https://getcomposer.org/download/) and is setup for inclusion _within_ a theme or plugin.
 
 ```shell
 cd ~/wp-content/themes/my-theme
